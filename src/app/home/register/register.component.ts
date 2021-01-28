@@ -39,4 +39,8 @@ export class RegisterComponent implements OnInit {
     });
     console.log(this.registerForm.value)
   }
+  
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
 }

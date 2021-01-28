@@ -18,8 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-
-
+import { RecaptchaModule } from "ng-recaptcha";
 
 
 @NgModule({
@@ -43,7 +42,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatFormFieldModule,
     MatCardModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule, 
+    // Captcha
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
