@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -8,39 +9,82 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   value = 'Clear me';
   register = true;
 
+  hide = true;
+  hideConfirm = true;
+
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) { }
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
+  }
+  private buildForm() {
     this.registerForm = this.formBuilder.group({
-      // recaptcha: ['', Validators.required]
+      recaptcha: ['', Validators.required],
       first_name: ['', Validators.required],
       middle_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      phone_number: ['', [Validators.required, Validators.maxLength(10)]],
+      phone_number: ['', [Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im), Validators.maxLength(10)]],
       address: this.formBuilder.group({
         city: ['', Validators.required],
         state: ['', Validators.required],
       }),
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]],
       password_confirmation: ['', Validators.required]
     });
   }
 
+
+  // get all form values
+  get recaptchaField() {
+    return this.registerForm.get('recaptcha');
+  }
+
+  get firstNameField() {
+    return this.registerForm.get('first_name');
+  }
+  get middleNameField() {
+    return this.registerForm.get('middle_name');
+  }
+  get lastNameField() {
+    return this.registerForm.get('last_name');
+  }
+  get phoneNumberField() {
+    return this.registerForm.get('phone_number');
+  }
+  get cityField() {
+    return this.registerForm.controls['address'].value.city;
+  }
+  get stateField() {
+    return this.registerForm.controls['address'].value.state;
+  }
+  get emailField() {
+    return this.registerForm.get('email');
+  }
+  get passwordField() {
+    return this.registerForm.get('password');
+  }
+  get passwordConfirmField() {
+    return this.registerForm.get('passowrd_confirmation');
+  }
+
+
   registerPost() {
-    this.registerService.postRegister(this.registerForm.value).then((resp:any) => {
+    this.registerService.postRegister(this.registerForm.value).then((resp: any) => {
       console.log(resp);
-    }).catch((err:any) => {
+    }).catch((err: any) => {
       console.error(err);
     });
     console.log(this.registerForm.value)
   }
-  
+
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    this.registerForm.controls['recaptcha'].setValue(captchaResponse);
   }
 }

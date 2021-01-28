@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+// Recaptcha module
+import { RecaptchaModule } from "ng-recaptcha";
 // Http modules 
-import { HttpClientModule  } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 // Angular Material modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +19,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { RecaptchaModule } from "ng-recaptcha";
+import { MatGridListModule } from '@angular/material/grid-list';
+
+
 
 
 @NgModule({
@@ -42,7 +45,8 @@ import { RecaptchaModule } from "ng-recaptcha";
     MatFormFieldModule,
     MatCardModule,
     MatTabsModule,
-    MatCheckboxModule, 
+    MatCheckboxModule,
+    MatGridListModule,
     // Captcha
     RecaptchaModule
   ],
