@@ -5,11 +5,11 @@ import { environment } from 'src/environments/environment.prod'
   providedIn: 'root'
 })
 export class RegisterService {
-  url = `${environment.url}security/create_account`
+  url = `/storeutags/security/create_account`
   constructor(private http: HttpClient) { }
 
 
   postRegister(body: any) {
-    return this.http.post(this.url, body)
+    return this.http.post(this.url, body).toPromise()
   }
 }

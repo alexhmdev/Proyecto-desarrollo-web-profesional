@@ -1,0 +1,7 @@
+{
+    "/storeutags/*": {
+        "target": "http://35.167.62.109",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
