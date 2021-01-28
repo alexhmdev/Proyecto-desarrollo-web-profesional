@@ -9,7 +9,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Http modules 
-import { HttpClientModule  } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 // Angular Material modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatCheckboxModule } from "@angular/material/checkbox";
-
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from "@angular/material/expansion";
 
 
 
@@ -43,7 +44,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatFormFieldModule,
     MatCardModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

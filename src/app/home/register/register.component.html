@@ -1,8 +1,8 @@
 <div class="login-page">
-    <mat-card class="mat-elevation-z12">
-      <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
-      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-        <!-- <mat-tab label="Sign In">
+  <mat-card class="mt-5">
+    <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <!-- <mat-tab label="Sign In">
             <mat-card-content>
               <form action="">
                 <mat-form-field>
@@ -52,106 +52,85 @@
               </form>
             </mat-card-content>
         </mat-tab> -->
-        <mat-tab label="Sign Up">
-          <mat-card-content>
-            <form action="" [formGroup]="registerForm">
+      <mat-tab label="Sign Up">
+        <mat-card-content class="p-2">
+          <form action="" [formGroup]="registerForm">
+            <table class="md-2" cols="3" rowHeight="2:1">
+
+              <td>
+                <mat-form-field>
+                  <input matInput placeholder="First name" required name="username" formControlName="first_name">
+                  <mat-icon matSuffix>perm_identity</mat-icon>
+                  <!-- <mat-error
+                                  *ngIf="first.invalid">
+                                  Username is required
+                                </mat-error> -->
+
+                </mat-form-field>
+              </td>
+
+
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="First name"
-                  required
-                  name="username"
-                 formControlName="first_name">
+                <input matInput placeholder="Middle name" name="username" formControlName="middle_name">
+                <mat-icon matSuffix>perm_identity</mat-icon>
+                <!-- <mat-error
+                                      *ngIf="first.invalid">
+                                      Username is required
+                                    </mat-error> -->
+
+              </mat-form-field>
+
+
+              <mat-form-field>
+                <input matInput placeholder="Last name" name="username" formControlName="last_name">
                 <mat-icon matSuffix>perm_identity</mat-icon>
                 <!-- <mat-error
                   *ngIf="first.invalid">
                   Username is required
                 </mat-error> -->
-  
+
               </mat-form-field>
+
+
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Middle name"
-                  name="username"
-                 formControlName="middle_name">
-                <mat-icon matSuffix>perm_identity</mat-icon>
-                <!-- <mat-error
-                  *ngIf="first.invalid">
-                  Username is required
-                </mat-error> -->
-  
-              </mat-form-field>
-              <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Last name"
-                  name="username"
-                 formControlName="last_name">
-                <mat-icon matSuffix>perm_identity</mat-icon>
-                <!-- <mat-error
-                  *ngIf="first.invalid">
-                  Username is required
-                </mat-error> -->
-  
-              </mat-form-field>
-              <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Phone number"
-                  name="username"
-                 formControlName="phone_number">
+                <input matInput placeholder="Phone number" name="username" formControlName="phone_number">
                 <mat-icon matSuffix>phone</mat-icon>
                 <!-- <mat-error
                   *ngIf="first.invalid">
                   Username is required
                 </mat-error> -->
-  
+
               </mat-form-field>
               <div formGroupName="address">
                 <mat-form-field>
-                    <input
-                      matInput
-                      placeholder="City"
-                      name="username"
-                     formControlName="city">
-                    <mat-icon matSuffix>phone</mat-icon>
-                    <!-- <mat-error
+                  <input matInput placeholder="City" name="username" formControlName="city">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <!-- <mat-error
                       *ngIf="first.invalid">
                       Username is required
                     </mat-error> -->
-      
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      placeholder="State"
-                      name="username"
-                     formControlName="state">
-                    <mat-icon matSuffix>phone</mat-icon>
-                    <!-- <mat-error
+
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="State" name="username" formControlName="state">
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <!-- <mat-error
                       *ngIf="first.invalid">
                       Username is required
                     </mat-error> -->
-      
-                  </mat-form-field>
+
+                </mat-form-field>
               </div>
               <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Email"
-                  formControlName="email">
-                  <!-- <mat-error *ngIf="email.invalid">Email is required</mat-error> -->
+                <input matInput placeholder="Email" formControlName="email">
+                <!-- <mat-error *ngIf="email.invalid">Email is required</mat-error> -->
                 <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
-              <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                  formControlName="password">
-                  <!-- <mat-error
+            </table>
+
+            <mat-form-field class="mt-2">
+              <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+              <!-- <mat-error
                     *ngIf="password.errors && password.errors.required">
                     Password is required
                   </mat-error>
@@ -159,30 +138,23 @@
                     *ngIf="password.errors && password.errors.minlength">
                     Password must be of length 6
                   </mat-error> -->
-                <mat-icon matSuffix>lock</mat-icon>
-  
-              </mat-form-field>
-              <mat-form-field>
-                  <input
-                  matInput
-                  placeholder="Confirm password"
-                  formControlName="password_confirmation">
-                  <!-- <mat-error
+              <mat-icon matSuffix>lock</mat-icon>
+
+            </mat-form-field>
+            <mat-form-field class="mt-2">
+              <input matInput placeholder="Confirm password" formControlName="password_confirmation">
+              <!-- <mat-error
                     *ngIf="repassword.errors && repassword.errors.required">
                     Re-Enter Password is required
                   </mat-error> -->
-                <mat-icon matSuffix>lock</mat-icon>
-              </mat-form-field>
-              <button
-                mat-raised-button
-                color="primary"
-                class="login-button" (click)="registerPost()">
-                Sign Up
-              </button>
-            </form>
-          </mat-card-content>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card>
-  </div>
-  
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="login-button" (click)="registerPost()">
+              Sign Up
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>
