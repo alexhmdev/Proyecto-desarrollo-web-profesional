@@ -70,14 +70,14 @@
               <div formGroupName="address">
                 <mat-form-field>
                   <input matInput placeholder="City" name="username" formControlName="city">
-                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-icon matSuffix>location_on</mat-icon>
                   <mat-error *ngIf="cityField.invalid && cityField.touched || cityField.invalid">
                     City is required
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                   <input matInput placeholder="State" name="username" formControlName="state">
-                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-icon matSuffix>location_on</mat-icon>
                   <mat-error *ngIf="stateField.invalid && stateField.touched || stateField.invalid">
                     State is required.
                   </mat-error>
