@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { RegisterService } from 'src/app/services/register.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -59,10 +59,10 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('phone_number');
   }
   get cityField() {
-    return this.registerForm.controls['address'].value.city;
+    return this.registerForm.get('address.city');
   }
   get stateField() {
-    return this.registerForm.controls['address'].value.state;
+    return this.registerForm.get('address.state');
   }
   get emailField() {
     return this.registerForm.get('email');
@@ -71,16 +71,24 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('password');
   }
   get passwordConfirmField() {
-    return this.registerForm.get('passowrd_confirmation');
+    return this.registerForm.get('password_confirmation');
   }
 
 
   registerPost() {
-    this.registerService.postRegister(this.registerForm.value).then((resp: any) => {
-      console.log(resp);
-    }).catch((err: any) => {
-      console.error(err);
-    });
+    this.registerForm.get('recaptcha').markAsTouched();
+    if (this.registerForm.valid) {
+      this.registerService.postRegister(this.registerForm.value).then((resp: any) => {
+        console.log(resp);
+        Swal.fire(
+          'Good job!',
+          'Registered correctly!',
+          'success'
+        )
+      }).catch((err: any) => {
+        console.error(err);
+      });
+    }
     console.log(this.registerForm.value)
   }
 

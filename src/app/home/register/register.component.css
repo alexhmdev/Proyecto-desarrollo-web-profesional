@@ -3,14 +3,26 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: #303F9F;
+  /* background-color: #303F9F; */
+  overflow: hidden;
   background-position: center;
   background-size: cover;
-  overflow: hidden;
 }
 
-mat-card {
-  width: 50%;
-  margin: 10% auto;
-  border-radius: 8px;
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+.button-right {
+  transform: translate(50%);
+}
+.register-button {
+  width: 20%;
+  position: relative;
+  transform: translateX(rem);
 }
