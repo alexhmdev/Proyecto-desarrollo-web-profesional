@@ -10,12 +10,11 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  value = 'Clear me';
   register = true;
 
   hide = true;
   hideConfirm = true;
-
+passNotMatch = true;
   registerForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
     this.buildForm();
@@ -40,6 +39,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  checkPass(){
+    console.log(this.passwordConfirmField.value)
+    if (this.passwordConfirmField.value !== this.passwordField.value) {
+      this.registerForm.get('password_confirmation').markAsDirty()
+    }
+  }
 
   // get all form values
   get recaptchaField() {
@@ -77,6 +82,7 @@ export class RegisterComponent implements OnInit {
 
   registerPost() {
     this.registerForm.get('recaptcha').markAsTouched();
+    console.log(this.registerForm.get('password_confirmation').value)
     if (this.registerForm.valid) {
       this.registerService.postRegister(this.registerForm.value).then((resp: any) => {
         console.log(resp);
