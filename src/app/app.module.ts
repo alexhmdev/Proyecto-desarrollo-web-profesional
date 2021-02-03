@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './home/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+// Recaptcha module
+import { RecaptchaModule } from "ng-recaptcha";
 // Http modules 
 import { HttpClientModule } from "@angular/common/http";
 // Angular Material modules
@@ -19,7 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatExpansionModule } from "@angular/material/expansion";
+import { MatExpansionModule } from '@angular/material/expansion';
+
+
 
 
 
@@ -46,7 +49,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
     MatTabsModule,
     MatCheckboxModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    // Captcha
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

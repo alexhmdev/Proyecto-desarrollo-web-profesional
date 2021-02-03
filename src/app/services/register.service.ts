@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.prod'
   providedIn: 'root'
 })
 export class RegisterService {
-  url = `/storeutags/security/create_account`
+  url = `${environment.url}/security/create_account`
   constructor(private http: HttpClient) { }
 
 

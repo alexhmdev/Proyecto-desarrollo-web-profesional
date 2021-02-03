@@ -1,157 +1,133 @@
-<div class="login-page">
-  <mat-card class="mt-5">
+<div class="login-page ">
+  <mat-card style="width: 40%;" class="ml-auto mr-auto mt-5 md-5 rounded-lg border border-light">
     <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
-      <!-- <mat-tab label="Sign In">
-            <mat-card-content>
-              <form action="">
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Email"
-                    required
-                    name="email"
-                    ngModel
-                    #email="ngModel">
-                    <mat-error *ngIf="email.invalid">Email is required</mat-error>
-                  <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Password"
-                    type="password"
-                    required
-                    minlength="6"
-                    name="password"
-                    ngModel
-                    #password="ngModel">
-                    <mat-error
-                      *ngIf="password.errors && password.errors.required">
-                      Password is required
-                    </mat-error>
-                    <mat-error
-                      *ngIf="password.errors && password.errors.minlength">
-                      Password must be of length 6
-                    </mat-error>
-                  <mat-icon matSuffix>lock</mat-icon>
-                </mat-form-field>
-                <mat-checkbox>Remember Me!</mat-checkbox>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  class="login-button">
-                  Sign In
-                </button>
-  
-                <button
-                  mat-raised-button
-                  class="login-button">
-                  Login with Google
-                </button>
-              </form>
-            </mat-card-content>
-        </mat-tab> -->
+      <mat-tab label="Sign In">
+        <p>Trabajando en el login...</p>
+        <!-- <mat-card-content>
+          <form action="">
+            <mat-form-field>
+              <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
+              <mat-error *ngIf="email.invalid">Email is required</mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel
+                #password="ngModel">
+              <mat-error *ngIf="password.errors && password.errors.required">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="password.errors && password.errors.minlength">
+                Password must be of length 6
+              </mat-error>
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            <mat-checkbox>Remember Me!</mat-checkbox>
+            <button mat-raised-button color="primary" class="login-button">
+              Sign In
+            </button>
+
+            <button mat-raised-button class="login-button">
+              Login with Google
+            </button>
+          </form>
+        </mat-card-content> -->
+      </mat-tab>
       <mat-tab label="Sign Up">
-        <mat-card-content class="p-2">
-          <form action="" [formGroup]="registerForm">
-            <table class="md-2" cols="3" rowHeight="2:1">
+        <mat-card-content class="d-flex justify-content-center overflow-hidden">
+          <form action="" (ngSubmit)="registerPost()" [formGroup]="registerForm">
+            <mat-form-field class="w-80">
+              <input matInput placeholder="First name" name="username" formControlName="first_name">
+              <mat-icon matSuffix>perm_identity</mat-icon>
+              <mat-error *ngIf="firstNameField.invalid && firstNameField.touched || firstNameField.invalid">
+                First name is required.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-80">
+              <input matInput placeholder="Middle name" formControlName="middle_name">
+              <mat-icon matSuffix>perm_identity</mat-icon>
+              <mat-error *ngIf="middleNameField.invalid && middleNameField.touched || middleNameField.invalid ">
+                Middle name is required
+              </mat-error>
 
-              <td>
-                <mat-form-field>
-                  <input matInput placeholder="First name" required name="username" formControlName="first_name">
-                  <mat-icon matSuffix>perm_identity</mat-icon>
-                  <!-- <mat-error
-                                  *ngIf="first.invalid">
-                                  Username is required
-                                </mat-error> -->
+            </mat-form-field>
+            <mat-form-field class="w-80">
+              <input matInput placeholder="Last name" formControlName="last_name">
+              <mat-icon matSuffix>perm_identity</mat-icon>
+              <mat-error *ngIf="lastNameField.invalid && lastNameField.touched || lastNameField.invalid">
+                Last name is required
+              </mat-error>
 
-                </mat-form-field>
-              </td>
-
-
-              <mat-form-field>
-                <input matInput placeholder="Middle name" name="username" formControlName="middle_name">
-                <mat-icon matSuffix>perm_identity</mat-icon>
-                <!-- <mat-error
-                                      *ngIf="first.invalid">
-                                      Username is required
-                                    </mat-error> -->
-
-              </mat-form-field>
-
-
-              <mat-form-field>
-                <input matInput placeholder="Last name" name="username" formControlName="last_name">
-                <mat-icon matSuffix>perm_identity</mat-icon>
-                <!-- <mat-error
-                  *ngIf="first.invalid">
-                  Username is required
-                </mat-error> -->
-
-              </mat-form-field>
-
-
-              <mat-form-field>
+            </mat-form-field >
+            <div class="row mx-auto">
+              <mat-form-field class="w-80">
                 <input matInput placeholder="Phone number" name="username" formControlName="phone_number">
                 <mat-icon matSuffix>phone</mat-icon>
-                <!-- <mat-error
-                  *ngIf="first.invalid">
-                  Username is required
-                </mat-error> -->
-
+                <mat-error *ngIf="phoneNumberField.invalid && phoneNumberField.touched || phoneNumberField.invalid">
+                  Phone number is required with at least 10 digits.
+                </mat-error>
               </mat-form-field>
               <div formGroupName="address">
-                <mat-form-field>
+                <mat-form-field class="w-80">
                   <input matInput placeholder="City" name="username" formControlName="city">
-                  <mat-icon matSuffix>phone</mat-icon>
-                  <!-- <mat-error
-                      *ngIf="first.invalid">
-                      Username is required
-                    </mat-error> -->
-
-                </mat-form-field>
-                <mat-form-field>
+                  <mat-icon matSuffix>location_on</mat-icon>
+                  <mat-error *ngIf="cityField.invalid && cityField.touched || cityField.invalid">
+                    City is required
+                  </mat-error>
+                </mat-form-field >
+                <mat-form-field class="w-80">
                   <input matInput placeholder="State" name="username" formControlName="state">
-                  <mat-icon matSuffix>phone</mat-icon>
-                  <!-- <mat-error
-                      *ngIf="first.invalid">
-                      Username is required
-                    </mat-error> -->
-
+                  <mat-icon matSuffix>location_on</mat-icon>
+                  <mat-error *ngIf="stateField.invalid && stateField.touched || stateField.invalid">
+                    State is required.
+                  </mat-error>
                 </mat-form-field>
               </div>
-              <mat-form-field>
-                <input matInput placeholder="Email" formControlName="email">
-                <!-- <mat-error *ngIf="email.invalid">Email is required</mat-error> -->
-                <mat-icon matSuffix>email</mat-icon>
-              </mat-form-field>
-            </table>
+            </div>
+            <mat-form-field class="w-80">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="emailField.invalid && emailField.touched || emailField.invalid">Email is required
+                e.g(example@mail.com)</mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
 
-            <mat-form-field class="mt-2">
-              <input matInput placeholder="Password" type="password" name="password" formControlName="password">
-              <!-- <mat-error
-                    *ngIf="password.errors && password.errors.required">
-                    Password is required
-                  </mat-error>
-                  <mat-error
-                    *ngIf="password.errors && password.errors.minlength">
-                    Password must be of length 6
-                  </mat-error> -->
-              <mat-icon matSuffix>lock</mat-icon>
+            <mat-form-field class="w-80">
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" type="password" name="password"
+                formControlName="password">
+              <mat-error *ngIf="passwordField.invalid && passwordField.touched || passwordField.invalid">
+                Password is required (Min length 8, at least 1 uppercase and 1 lowercase)
+              </mat-error>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" type="button">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
 
             </mat-form-field>
-            <mat-form-field class="mt-2">
-              <input matInput placeholder="Confirm password" formControlName="password_confirmation">
-              <!-- <mat-error
-                    *ngIf="repassword.errors && repassword.errors.required">
-                    Re-Enter Password is required
-                  </mat-error> -->
-              <mat-icon matSuffix>lock</mat-icon>
+            <mat-form-field class="w-80">
+              <div class="bad-pattern" style="top: -20rem; transform: translateY(250%);" *ngIf="passwordField.value !== passwordConfirmField.value">
+                <small>Passwrod not match.</small>
+            </div>
+              <input matInput [type]="hideConfirm ? 'password' : 'text'" placeholder="Confirm password"
+                formControlName="password_confirmation">
+              <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideConfirm" type="button">
+                <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              
+
             </mat-form-field>
-            <button mat-raised-button color="primary" class="login-button" (click)="registerPost()">
-              Sign Up
-            </button>
+            <div class="row mx-auto">
+              <div class="col-6">
+                <re-captcha (resolved)="resolved($event)" siteKey="6LcOFEAaAAAAABu0tcbrHosezK98a5USjSYM09lT">
+                </re-captcha>
+                <mat-error *ngIf="recaptchaField.invalid && recaptchaField.touched">Please solve de captcha to continue.
+                </mat-error>
+              </div>
+              <div class="col ml-5 mt-4 button-right float-right">
+                <button mat-raised-button color="primary" class="login-button" type="submit">Sign up</button>
+              </div>
+            </div>
+
           </form>
         </mat-card-content>
       </mat-tab>

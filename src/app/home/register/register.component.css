@@ -1,4 +1,36 @@
-mat-card {
-  width: 50%;
-  margin: 10% auto;
+.login-page {
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* background-color: #303F9F; */
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100% auto;
+  margin: 1rem;
+  position: relative;
+}
+
+.button-right {
+  transform: translate(50%);
+}
+.register-button {
+  width: 20%;
+  position: relative;
+  transform: translateX(rem);
+}
+
+.bad-pattern {
+  margin-top: 2px;
+  font-size: 14px;
+  color: #dc3545;
 }
