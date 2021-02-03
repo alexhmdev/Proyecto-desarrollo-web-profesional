@@ -11,10 +11,10 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   register = true;
-
+  forgotPass = false;
   hide = true;
   hideConfirm = true;
-passNotMatch = true;
+  passNotMatch = true;
   registerForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
     this.buildForm();
@@ -39,7 +39,7 @@ passNotMatch = true;
     });
   }
 
-  checkPass(){
+  checkPass() {
     console.log(this.passwordConfirmField.value)
     if (this.passwordConfirmField.value !== this.passwordField.value) {
       this.registerForm.get('password_confirmation').markAsDirty()
@@ -100,5 +100,9 @@ passNotMatch = true;
 
   resolved(captchaResponse: string) {
     this.registerForm.controls['recaptcha'].setValue(captchaResponse);
+  }
+
+  recoveryPass() {
+
   }
 }

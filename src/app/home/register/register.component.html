@@ -1,10 +1,10 @@
 <div fxLayout="row wrap" fxLayoutAlign="center">
   <mat-card>
-    <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
+    <mat-card-title style="text-align:center;">{{!forgotPass ? 'SignIn/SignUp' : 'Restore password' }}</mat-card-title>
     <mat-tab-group mat-stretch-tabs>
       <mat-tab label="Sign In">
         <mat-card-content class="login-form">
-          <form action="">
+          <form action="" *ngIf="!forgotPass">
             <mat-form-field>
               <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
               <mat-error *ngIf="email.invalid">Email is required</mat-error>
@@ -14,6 +14,7 @@
             <mat-form-field>
               <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel
                 #password="ngModel">
+              <mat-hint align="end"><a (click)="recoveryPass()">Forgot passoword?</a></mat-hint>
               <mat-error *ngIf="password.errors && password.errors.required">
                 Password is required
               </mat-error>
@@ -24,6 +25,22 @@
             </mat-form-field>
             <br>
             <mat-checkbox>Remember Me!</mat-checkbox>
+            <br>
+            <button mat-raised-button color="primary" class="login-button ">
+              Sign In
+            </button>
+          </form>
+          <form action="" *ngIf="forgotPass">
+            <mat-form-field>
+              <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
+              <mat-error *ngIf="email.invalid">Email is required</mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="Code" type="password" name="code">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
             <br>
             <button mat-raised-button color="primary" class="login-button ">
               Sign In
