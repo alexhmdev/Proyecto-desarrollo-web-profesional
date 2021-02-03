@@ -3,14 +3,14 @@
     <mat-card-title style="text-align:center;">SignIn/SignUp</mat-card-title>
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
       <mat-tab label="Sign In">
-        <p>Trabajando en el login...</p>
-        <!-- <mat-card-content>
+        <mat-card-content class="login-form">
           <form action="">
             <mat-form-field>
               <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
               <mat-error *ngIf="email.invalid">Email is required</mat-error>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
+            <br>
             <mat-form-field>
               <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel
                 #password="ngModel">
@@ -22,16 +22,14 @@
               </mat-error>
               <mat-icon matSuffix>lock</mat-icon>
             </mat-form-field>
+            <br>
             <mat-checkbox>Remember Me!</mat-checkbox>
-            <button mat-raised-button color="primary" class="login-button">
+            <br>
+            <button mat-raised-button color="primary" class="login-button ">
               Sign In
             </button>
-
-            <button mat-raised-button class="login-button">
-              Login with Google
-            </button>
           </form>
-        </mat-card-content> -->
+        </mat-card-content>
       </mat-tab>
       <mat-tab label="Sign Up">
         <mat-card-content class="jistify-content-center overflow-hidden ">

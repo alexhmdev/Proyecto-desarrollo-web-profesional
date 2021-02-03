@@ -26,3 +26,9 @@ mat-form-field {
   position: relative;
   transform: translateX(rem);
 }
+
+.login-form {
+  margin-left: 50%;
+  transform: translate(-50%);
+  width: 100% auto;
+}
