@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecaptchaModule } from "ng-recaptcha";
 // Http modules 
 import { HttpClientModule } from "@angular/common/http";
+// Angular Flex layout
+import { FlexLayoutModule } from '@angular/flex-layout';
 // Angular Material modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -51,7 +53,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatGridListModule,
     MatExpansionModule,
     // Captcha
-    RecaptchaModule
+    RecaptchaModule,
+    // Flex layout
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

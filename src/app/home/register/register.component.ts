@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
+import { RecoveryPassService } from 'src/app/services/recovery-pass.service';
 import { RegisterService } from 'src/app/services/register.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -11,12 +12,20 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   register = true;
-
+  forgotPass = false;
   hide = true;
   hideConfirm = true;
-passNotMatch = true;
+  passNotMatch = true;
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) {
+  recoveryEmail = new FormControl('', [Validators.required, Validators.email]);
+  recoveryCode = new FormControl('', [Validators.required]);
+  newPass = new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]);
+  newPass_confirm = new FormControl('', [Validators.required])
+
+  sendedCode = false;
+  reenterPass: boolean;
+  recoveryCodeSaved: number;
+  constructor(private formBuilder: FormBuilder, private recoveryService: RecoveryPassService, private registerService: RegisterService) {
     this.buildForm();
   }
 
@@ -39,10 +48,10 @@ passNotMatch = true;
     });
   }
 
-  checkPass(){
+  checkPass() {
     console.log(this.passwordConfirmField.value)
     if (this.passwordConfirmField.value !== this.passwordField.value) {
-      this.registerForm.get('password_confirmation').markAsDirty()
+      this.registerForm.get('password_confirmation').markAsDirty();
     }
   }
 
@@ -100,5 +109,101 @@ passNotMatch = true;
 
   resolved(captchaResponse: string) {
     this.registerForm.controls['recaptcha'].setValue(captchaResponse);
+  }
+
+  recoveryPass() {
+    this.forgotPass = true;
+  }
+
+  sendRecoveryCode() {
+    this.recoveryService.postRecovery({ email: this.recoveryEmail.value }).then((resp: any) => {
+      console.log(resp);
+      if (resp.status == "error") {
+        Swal.fire(
+          'Oops',
+          resp.error_message,
+          'error'
+        )
+      } else {
+        Swal.fire(
+          'Good job!',
+          'A code was sended to your email, please check and write it to continue',
+          'success'
+        ).then(() => {
+          this.sendedCode = true;
+        });
+      }
+
+    }).catch((err: any) => {
+      console.log(err);
+      Swal.fire(
+        'Oops',
+        err,
+        'error'
+      )
+    });
+  }
+  verifyRecoveryCode() {
+    this.recoveryService.postValidateCode({ email: this.recoveryEmail.value, recovery_code: this.recoveryCode.value }).then((resp: any) => {
+      console.log(resp);
+      if (resp.status == "error") {
+        Swal.fire(
+          'Oops',
+          resp.error_message,
+          'error'
+        )
+      } else {
+        Swal.fire(
+          'Good job!',
+          'Your code is successfuly verified',
+          'success'
+        ).then(() => {
+          this.recoveryCodeSaved = this.recoveryCode.value;
+          this.sendedCode = false;
+          this.reenterPass = true;
+
+        });
+      }
+
+    }).catch((err: any) => {
+      console.log(err);
+      Swal.fire(
+        'Oops',
+        err,
+        'error'
+      )
+    });
+  }
+
+  changePassword() {
+    this.recoveryService.postChangePass({ email: this.recoveryEmail.value, recovery_code: this.recoveryCode.value, password: this.newPass.value, password_confirmation: this.newPass_confirm.value }).then((resp: any) => {
+      console.log(resp);
+      if (resp.status == "error") {
+        Swal.fire(
+          'Oops',
+          resp.error_message,
+          'error'
+        )
+      } else {
+        Swal.fire(
+          'Good job!',
+          'New password created successfuly',
+          'success'
+        ).then(() => {
+          this.recoveryCodeSaved = 0;
+          this.sendedCode = false;
+          this.reenterPass = false;
+          this.forgotPass = false
+        });
+      }
+
+    }).catch((err: any) => {
+      console.log(err);
+      Swal.fire(
+        'Oops',
+        err,
+        'error'
+      )
+    });
   }
 }
