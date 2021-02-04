@@ -1,54 +1,128 @@
-<div fxLayout="row wrap" fxLayoutAlign="center">
+<div fxLayout="row" fxLayoutAlign="center center">
   <mat-card>
     <mat-card-title style="text-align:center;">{{!forgotPass ? 'SignIn/SignUp' : 'Restore password' }}</mat-card-title>
     <mat-tab-group mat-stretch-tabs>
-      <mat-tab label="Sign In">
-        <mat-card-content class="login-form">
+      <mat-tab label="Sign In" *ngIf="!forgotPass">
+        <mat-card-content>
           <form action="" *ngIf="!forgotPass">
-            <mat-form-field>
-              <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
-              <mat-error *ngIf="email.invalid">Email is required</mat-error>
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel
-                #password="ngModel">
-              <mat-hint align="end"><a (click)="recoveryPass()">Forgot passoword?</a></mat-hint>
-              <mat-error *ngIf="password.errors && password.errors.required">
-                Password is required
-              </mat-error>
-              <mat-error *ngIf="password.errors && password.errors.minlength">
-                Password must be of length 6
-              </mat-error>
-              <mat-icon matSuffix>lock</mat-icon>
-            </mat-form-field>
-            <br>
-            <mat-checkbox>Remember Me!</mat-checkbox>
-            <br>
-            <button mat-raised-button color="primary" class="login-button ">
-              Sign In
-            </button>
+            <div fxLayout="row" fxLayoutAlign="center">
+              <div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Email" name="email" ngModel #email="ngModel">
+                    <mat-error *ngIf="email.invalid">Email is required</mat-error>
+                    <mat-icon matSuffix>email</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput placeholder="Password" type="password" name="password" ngModel #password="ngModel">
+                    <mat-hint align="end" style="color: dodgerblue; cursor: pointer;" (click)="recoveryPass()">Forgot
+                      password?
+                    </mat-hint>
+                    <mat-error *ngIf="password.errors && password.errors.required">
+                      Password is required
+                    </mat-error>
+                    <mat-error *ngIf="password.errors && password.errors.minlength">
+                      Password must be of length 6
+                    </mat-error>
+                    <mat-icon matSuffix>lock</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-checkbox>Remember Me!</mat-checkbox> <br>
+                  <button mat-raised-button color="primary" class="w-100">
+                    Sign In
+                  </button>
+                </div>
+              </div>
+            </div>
           </form>
-          <form action="" *ngIf="forgotPass">
-            <mat-form-field>
-              <input matInput placeholder="Email" required name="email" ngModel #email="ngModel">
-              <mat-error *ngIf="email.invalid">Email is required</mat-error>
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-              <input matInput placeholder="Code" type="password" name="code">
-              <mat-icon matSuffix>lock</mat-icon>
-            </mat-form-field>
-            <br>
-            <button mat-raised-button color="primary" class="login-button ">
-              Sign In
-            </button>
-          </form>
+
         </mat-card-content>
       </mat-tab>
-      <mat-tab label="Sign Up">
+      <mat-tab label="Verify your email" *ngIf="forgotPass && !reenterPass">
+        <form>
+          <div fxLayout="row">
+            <mat-form-field>
+              <input matInput placeholder="Email" name="email" [formControl]="recoveryEmail">
+              <mat-error>Email is required</mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-hint *ngIf="sendedCode" align="end" style="color: dodgerblue; cursor: pointer;"
+                (click)="sendRecoveryCode()">Not received
+                yet? click to send again.
+              </mat-hint>
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row">
+            <mat-form-field *ngIf="sendedCode">
+              <input matInput placeholder="Code" [formControl]="recoveryCode" type="text" name="code">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+          </div>
+          <button *ngIf="!sendedCode && !reenterPass" mat-raised-button [disabled]="recoveryEmail.invalid"
+            color="primary" class="w-100" (click)="sendRecoveryCode()">
+            Send verification code
+          </button>
+          <button *ngIf="sendedCode" mat-raised-button [disabled]="recoveryCode.invalid" color="primary" class="w-100"
+            (click)="verifyRecoveryCode()">
+            Verify code
+          </button>
+        </form>
+      </mat-tab>
+
+      <mat-tab label="Create new password" *ngIf="reenterPass">
+        <form>
+          <div fxLayout="row">
+            <mat-form-field>
+              <input matInput placeholder="Email" name="email" [formControl]="recoveryEmail">
+              <mat-error>Email is required</mat-error>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field *ngIf="sendedCode">
+              <input matInput placeholder="Code" [formControl]="recoveryCode" type="text" name="code">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field>
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="New password" type="password"
+                name="password" [formControl]="newPass">
+              <mat-error *ngIf="newPass.invalid && newPass.touched || newPass.invalid">
+                Password is required (Min length 8, at least 1 uppercase and 1 lowercase)
+              </mat-error>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" type="button">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row">
+            <mat-form-field>
+              <input matInput [type]="hideConfirm ? 'password' : 'text'" placeholder="Confirm new password"
+                [formControl]="newPass_confirm">
+              <mat-hint *ngIf="newPass.value !== newPass_confirm.value" style="color: red;">
+                Password not match.
+              </mat-hint>
+              <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideConfirm" type="button">
+                <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button [disabled]="newPass_confirm.value != newPass.value" color="primary" class="w-100"
+            (click)="changePassword()">
+            Change password
+          </button>
+
+        </form>
+      </mat-tab>
+      <mat-tab label="Sign Up" *ngIf="!forgotPass">
         <mat-card-content class="d-flex justify-content-center overflow-hidden">
           <form action="" (ngSubmit)="registerPost()" [formGroup]="registerForm">
             <mat-form-field class="w-80">
@@ -119,12 +193,11 @@
 
             </mat-form-field>
             <mat-form-field class="w-80">
-              <div class="bad-pattern" style="top: -20rem; transform: translateY(250%);"
-                *ngIf="passwordField.value !== passwordConfirmField.value">
-                <small>Passwrod not match.</small>
-              </div>
+
               <input matInput [type]="hideConfirm ? 'password' : 'text'" placeholder="Confirm password"
                 formControlName="password_confirmation">
+              <mat-hint *ngIf="passwordField.value != passwordConfirmField.value" style="color: red;">Password not match
+              </mat-hint>
               <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hideConfirm" type="button">
                 <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
