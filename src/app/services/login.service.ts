@@ -10,6 +10,9 @@ export class LoginService {
 
 
   postLogin(body: any) {
+      console.log(body);
+      
+      
     return this.http.post(this.url, body).toPromise();
   }
  

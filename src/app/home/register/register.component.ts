@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { MatAccordion } from "@angular/material/expansion";
+import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { LoginService } from "src/app/services/login.service";
 import { RecoveryPassService } from "src/app/services/recovery-pass.service";
@@ -45,7 +46,8 @@ export class RegisterComponent implements OnInit {
     private recoveryService: RecoveryPassService,
     private registerService: RegisterService,
     private cookie: CookieService, 
-    private loginService : LoginService
+    private loginService : LoginService, 
+    private router : Router
   ) {
     this.buildForm();
   }
@@ -56,13 +58,13 @@ export class RegisterComponent implements OnInit {
         this.rememberPass = true;
       }
       console.info("cookies:", this.cookie.getAll());
-      this.loginPass.setValue(this.cookie.get("email"));
-      this.loginEmail.setValue(this.cookie.get("pass"));
+      this.loginEmail.setValue(this.cookie.get("email"));
+      this.loginPass.setValue(this.cookie.get("pass"));
      
     }
    this.loginForm = new FormGroup({
       email: this.loginEmail,
-      passsword: this.loginPass
+      password: this.loginPass
     });
   }
   private buildForm() {
@@ -251,7 +253,8 @@ export class RegisterComponent implements OnInit {
     } else {
       this.cookie.deleteAll();
     }
-    this.loginService.postLogin(this.loginForm).then((resp: any) =>{
+    this.loginService.postLogin(this.loginForm.value).then((resp: any) =>{
+      console.log(resp);
       if (resp.status == "error") {
         Swal.fire("Oops", resp.error_message, "error");
       } else {
@@ -260,13 +263,14 @@ export class RegisterComponent implements OnInit {
           "New password created successfuly",
           "success"
         ).then(() => {
-          
+          localStorage.setItem("user_data", JSON.stringify(resp.data));
+          this.router.navigate(["/home"]);
         });
       }
 
     }).catch((err:any)=>{
-      console.log(err);
-      Swal.fire("Oops", err, "error");
+      console.log(JSON.stringify(err));
+      Swal.fire("Oops", "error");
     })
 
 
