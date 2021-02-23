@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { MatAccordion } from "@angular/material/expansion";
 import { CookieService } from "ngx-cookie-service";
+import { LoginService } from "src/app/services/login.service";
 import { RecoveryPassService } from "src/app/services/recovery-pass.service";
 import { RegisterService } from "src/app/services/register.service";
 import Swal from "sweetalert2";
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private recoveryService: RecoveryPassService,
     private registerService: RegisterService,
-    private cookie: CookieService
+    private cookie: CookieService, 
+    private loginService : LoginService
   ) {
     this.buildForm();
   }
@@ -249,6 +251,25 @@ export class RegisterComponent implements OnInit {
     } else {
       this.cookie.deleteAll();
     }
+    this.loginService.postLogin(this.loginForm).then((resp: any) =>{
+      if (resp.status == "error") {
+        Swal.fire("Oops", resp.error_message, "error");
+      } else {
+        Swal.fire(
+          "Good job!",
+          "New password created successfuly",
+          "success"
+        ).then(() => {
+          
+        });
+      }
+
+    }).catch((err:any)=>{
+      console.log(err);
+      Swal.fire("Oops", err, "error");
+    })
+
+
     
   }
 }
