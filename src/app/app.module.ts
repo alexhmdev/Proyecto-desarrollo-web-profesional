@@ -26,9 +26,12 @@ import { MatExpansionModule } from "@angular/material/expansion";
 
 // Cookies
 import { CookieService } from "ngx-cookie-service";
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { HomeComponent } from './home/home/home.component';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,6 +54,7 @@ import { CookieService } from "ngx-cookie-service";
     RecaptchaModule,
     // Flex layout
     FlexLayoutModule,
+    SharedModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

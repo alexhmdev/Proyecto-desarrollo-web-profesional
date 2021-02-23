@@ -126,6 +126,6 @@
   },
   "defaultProject": "DWP",
   "cli": {
-    "analytics": "eea203bc-29d4-487e-8f6c-ae79eb1cbb99"
+    "analytics": false
   }
 }
