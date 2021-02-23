@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginGuard } from './guards/login.guard';
 import { HomeComponent } from './home/home/home.component';
 import { RegisterComponent } from './home/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent 
   },
   {
-    path: 'home', component: HomeComponent
+    path: 'home', component: HomeComponent, canActivate: [LoginGuard]
   },
   {
     path: '**', component: NotFoundComponent

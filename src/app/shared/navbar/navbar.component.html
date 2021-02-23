@@ -1,13 +1,38 @@
-<p>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+  <p>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon" (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
     <span class="example-spacer"></span>
     <mat-label>{{name}}</mat-label>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>account_circle</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Cart</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>perm_identity</mat-icon>
+    <span>My profile</span>
+  </button>
+  <button mat-menu-item (click)="openDialog()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Sign out</span>
+  </button>
+</mat-menu>
   </mat-toolbar>
 </p>
+
+</mat-drawer-container>

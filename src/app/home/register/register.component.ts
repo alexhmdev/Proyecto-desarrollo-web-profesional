@@ -260,7 +260,7 @@ export class RegisterComponent implements OnInit {
       } else {
         Swal.fire(
           "Good job!",
-          "New password created successfuly",
+          "You signed in successfuly",
           "success"
         ).then(() => {
           localStorage.setItem("user_data", JSON.stringify(resp.data));
