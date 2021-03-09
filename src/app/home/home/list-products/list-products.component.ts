@@ -55,7 +55,6 @@ export class ListProductsComponent implements OnInit {
 
   getProducts() {
     setTimeout(() => {
-      console.log(this.searchItem);
       this.product
         .getProducts(this.searchItem)
         .then((resp: any) => {
