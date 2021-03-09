@@ -9,7 +9,7 @@ export class RecoveryPassService {
 
   url = `${environment.url}/security/request_recovery_code`
   urlValidateCode = `${environment.url}/security/validate_recovery_code`
-  urlChangePass = `${environment.url}/security/validate_recovery_code`
+  urlChangePass = `${environment.url}/security/update_password`
   constructor(private http: HttpClient) { }
 
 
