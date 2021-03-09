@@ -7,6 +7,7 @@ import { environment } from "src/environments/environment.prod";
 })
 export class ProductsService {
   url = `${environment.url}/catalogs/items/by_text/`;
+  urlB = `${environment.url}/catalogs/items/by_category/`;
 
   constructor(private http: HttpClient) {}
 
@@ -18,5 +19,11 @@ export class ProductsService {
       console.log("con filtro");
       return this.http.get(this.url + licencia).toPromise();
     }
+  }
+
+  getProductsByCategory(categories: Array<any>) {
+    let categorias = categories.toString();
+    console.log(categorias.replace(/,/g, ";"));
+    return this.http.get(this.urlB + categorias.replace(/,/g, ";")).toPromise();
   }
 }

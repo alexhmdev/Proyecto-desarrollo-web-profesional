@@ -88,5 +88,11 @@ export class ListProductsComponent implements OnInit {
       }
     });
     console.info(arrFilter);
+    this.product
+      .getProductsByCategory(arrFilter)
+      .then((resp: any) => {
+        this.products = resp.data.items;
+      })
+      .catch((err: any) => {});
   }
 }
