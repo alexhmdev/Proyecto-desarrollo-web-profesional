@@ -1,46 +1,55 @@
 <div class="container">
-   
-       <div class="row">
-            <div class="col-2">
-        <section class="mt-3">
-            <mat-checkbox class="example-margin" [color]="task.color">Category</mat-checkbox>
-          </section>
+  <div class="row">
+    <div class="col-2">
+      <section class="mt-3" *ngFor="let item of task.subtasks; let i = index">
+        <mat-checkbox
+          class="example-margin"
+          [(ngModel)]="item.completed"
+          [color]="task.color"
+          (ngModelChange)="getProductByCategory()"
+          >{{ item.name }}</mat-checkbox
+        >
+      </section>
     </div>
-        <div class="col-10">
-            <mat-form-field class="w-100">
-                <input type="text"
-                       placeholder="Search"
-                       matInput
-                       [formControl]="">
-                       <mat-icon matSuffix>search</mat-icon>
-              </mat-form-field>
-              <div class="row">
-                <div class="col-6">
-                 <mat-card>
-                     <mat-card-title>Paquete 1 ejemplo asdjasid</mat-card-title> <br>
-                     <div class="row">
-                         <img class="col-3 ml-2" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                         <mat-card-content class="col-9">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi quod natus fuga, aliquam doloribus aliquid itaque, commodi saepe voluptatibus officiis beatae quo optio omnis eum quibusdam fugit, cum quae. Repellendus?
-                             <br>
-                             <p class="mt-2">1500</p>
-                         </mat-card-content>
-                     </div>
-                 </mat-card>
-                </div>
-                <div class="col-6">
-                 <mat-card>
-                     <mat-card-title>Paquete 1 ejemplo asdjasid</mat-card-title> <br>
-                     <div class="row">
-                         <img class="col-3 ml-2" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                         <mat-card-content class="col-9">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi quod natus fuga, aliquam doloribus aliquid itaque, commodi saepe voluptatibus officiis beatae quo optio omnis eum quibusdam fugit, cum quae. Repellendus?
-                             <br>
-                             <p class="mt-2">1500</p>
-                         </mat-card-content>
-                     </div>
-                 </mat-card>
-                </div>
+    <div class="col-10">
+      <mat-form-field class="w-100">
+        <input
+          type="text"
+          placeholder="Search"
+          matInput
+          (ngModelChange)="getProducts(searchItem)"
+          [(ngModel)]="searchItem"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      <p *ngIf="products" class="text-primary">
+        {{ products.length }} productos encontrados
+      </p>
+      <div class="row">
+        <div class="col-6 mt-2" *ngFor="let item of products">
+          <mat-card>
+            <mat-card-title>{{ item.short_description }}</mat-card-title> <br />
+            <div class="row">
+              <div class="col-md-3">
+                <img
+                  mat-card-image
+                  [src]="item.images_small"
+                  alt="Photo of a product"
+                />
+              </div>
+              <div class="col-md-9">
+                <mat-card-content
+                  >{{ item.long_description }}
+                  <br />
+                  <p class="mt-2" style="font-weight: bolder">
+                    ${{ item.price }}
+                  </p>
+                </mat-card-content>
+              </div>
             </div>
+          </mat-card>
         </div>
-       </div>
-       
+      </div>
+    </div>
+  </div>
 </div>
