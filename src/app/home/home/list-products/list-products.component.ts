@@ -15,6 +15,7 @@ export interface Task {
   styleUrls: ["./list-products.component.css"],
 })
 export class ListProductsComponent implements OnInit {
+  searchItem: string = "";
   options = ["comida", "bebidas", "ejemplo"];
   task: Task = {
     name: "Indeterminate",
@@ -22,9 +23,8 @@ export class ListProductsComponent implements OnInit {
     color: "primary",
     subtasks: [],
   };
-  searchItem: any;
   categories: any;
-  products: any;
+  products = [];
   categoriesFilter: any[];
   constructor(
     private product: ProductsService,
@@ -40,7 +40,6 @@ export class ListProductsComponent implements OnInit {
     this.category
       .getAll()
       .then((resp: any) => {
-        console.log(resp);
         resp.data.categories.forEach((element) => {
           this.task.subtasks.push({
             name: element.description,
@@ -54,28 +53,22 @@ export class ListProductsComponent implements OnInit {
       });
   }
 
-  getProducts(licencia?: any) {
-    if (licencia == undefined) {
+  getProducts() {
+    setTimeout(() => {
+      console.log(this.searchItem);
       this.product
-        .getProducts()
+        .getProducts(this.searchItem)
         .then((resp: any) => {
-          console.log(resp);
+          if (!resp.data) {
+            console.log("no hay mas datos");
+          }
+          // console.log(resp);
           this.products = resp.data.items;
         })
         .catch((err: any) => {
           console.error(err);
         });
-    } else {
-      this.product
-        .getProducts(licencia)
-        .then((resp: any) => {
-          console.log(resp);
-          this.products = resp.data.items;
-        })
-        .catch((err: any) => {
-          console.error(err);
-        });
-    }
+    }, 100);
   }
 
   getProductByCategory() {

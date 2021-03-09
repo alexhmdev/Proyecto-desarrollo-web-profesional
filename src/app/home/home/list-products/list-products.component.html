@@ -1,6 +1,24 @@
 <div class="container">
   <div class="row">
+    <div class="col-2"></div>
+    <div class="col-10 text-center">
+      <mat-form-field class="w-100">
+        <input
+          name="termino"
+          type="text"
+          placeholder="Search"
+          matInput
+          (ngModelChange)="getProducts()"
+          [(ngModel)]="searchItem"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-2">
+      <p class="text-primary">Categorias</p>
       <section class="mt-3" *ngFor="let item of task.subtasks; let i = index">
         <mat-checkbox
           class="example-margin"
@@ -12,32 +30,32 @@
       </section>
     </div>
     <div class="col-10">
-      <mat-form-field class="w-100">
-        <input
-          type="text"
-          placeholder="Search"
-          matInput
-          (ngModelChange)="getProducts(searchItem)"
-          [(ngModel)]="searchItem"
-        />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-      <p *ngIf="products" class="text-primary">
-        {{ products.length }} items founded
-      </p>
       <div class="row">
-        <div class="col-6 mt-2" *ngFor="let item of products">
+        <div class="col">
+          <p *ngIf="products" class="text-primary">
+            {{ products.length }} productos encontrados
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-2" *ngFor="let item of products">
           <mat-card>
-            <mat-card-title>{{ item.short_description }}</mat-card-title> <br />
             <div class="row">
-              <div class="col-md-3">
+              <div class="col">
+                <mat-card-title>{{ item.short_description }}</mat-card-title>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-3">
                 <img
                   mat-card-image
+                  style="margin-top: 5px"
                   [src]="item.images_small"
                   alt="Photo of a product"
                 />
               </div>
-              <div class="col-md-9">
+              <div class="col-9">
                 <mat-card-content
                   >{{ item.long_description }}
                   <br />

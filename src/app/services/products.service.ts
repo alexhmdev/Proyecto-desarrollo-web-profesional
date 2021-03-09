@@ -11,14 +11,15 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(licencia?: string) {
-    if (licencia == undefined) {
-      console.log("sin filtro");
-      return this.http.get(this.url).toPromise();
-    } else {
-      console.log("con filtro");
-      return this.http.get(this.url + licencia).toPromise();
-    }
+  getProducts(licencia) {
+    // if (licencia == undefined) {
+    //   console.log("sin filtro");
+    //   return this.http.get(this.url).toPromise();
+    // } else {
+
+    // }
+
+    return this.http.get(this.url + licencia).toPromise();
   }
 
   getProductsByCategory(categories: Array<any>) {
