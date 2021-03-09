@@ -23,15 +23,17 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatExpansionModule } from "@angular/material/expansion";
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 
 // Cookies
 import { CookieService } from "ngx-cookie-service";
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './home/home/home.component';
 import { SharedModule } from "./shared/shared.module";
+import { ListProductsComponent } from './home/home/list-products/list-products.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,6 +52,7 @@ import { SharedModule } from "./shared/shared.module";
     MatCheckboxModule,
     MatGridListModule,
     MatExpansionModule,
+    MatAutocompleteModule,
     // Captcha
     RecaptchaModule,
     // Flex layout

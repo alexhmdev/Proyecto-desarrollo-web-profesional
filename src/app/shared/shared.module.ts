@@ -18,7 +18,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     MatFormFieldModule,
     MatMenuModule,
     MatDialogModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   exports: [
     NavbarComponent
