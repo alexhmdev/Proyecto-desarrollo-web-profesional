@@ -1,34 +1,46 @@
-
-
-  <p>
+<p>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+    >
       <mat-icon>menu</mat-icon>
     </button>
     <span>My App</span>
     <span class="example-spacer"></span>
-    <mat-label *ngIf="name == 'Log in'" style="cursor: pointer;" [routerLink]="['/register']" >{{name}}</mat-label>
-    <mat-label *ngIf="name != 'Log in'">{{name}}</mat-label>
-    <button *ngIf="name != 'Log in'" mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon >account_circle</mat-icon>
+    <mat-label
+      *ngIf="name == 'Log in'"
+      style="cursor: pointer"
+      [routerLink]="['/register']"
+      >{{ name }}</mat-label
+    >
+    <mat-label *ngIf="name != 'Log in'">{{ name }}</mat-label>
+    <button
+      *ngIf="name != 'Log in'"
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      #menuTrigger
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+    >
+      <mat-icon>account_circle</mat-icon>
     </button>
-    &nbsp;
-      <mat-icon *ngIf="name != 'Log in'" matBadge="{{cartItems}}" matBadgeColor="warn">shopping_cart</mat-icon>
-    <mat-menu #menu="matMenu">
-    &nbsp;
+    <button mat-icon-button *ngIf="name != 'Log in'" (click)="deleteCart()">
+      <mat-icon matBadge="{{ cartItems }}" matBadgeColor="warn"
+        >shopping_cart</mat-icon
+      >
+    </button>
 
-  <button mat-menu-item>
-    <mat-icon>shopping_cart</mat-icon>
-    <span>Cart</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>perm_identity</mat-icon>
-    <span>My profile</span>
-  </button>
-  <button mat-menu-item (click)="openDialog()">
-    <mat-icon>exit_to_app</mat-icon>
-    <span>Sign out</span>
-  </button>
-</mat-menu>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>perm_identity</mat-icon>
+        <span>My profile</span>
+      </button>
+      <button mat-menu-item (click)="openDialog()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 </p>

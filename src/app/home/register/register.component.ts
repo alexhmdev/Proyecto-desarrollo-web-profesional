@@ -45,26 +45,25 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private recoveryService: RecoveryPassService,
     private registerService: RegisterService,
-    private cookie: CookieService, 
-    private loginService : LoginService, 
-    private router : Router
+    private cookie: CookieService,
+    private loginService: LoginService,
+    private router: Router
   ) {
     this.buildForm();
   }
 
   ngOnInit(): void {
-    if (this.cookie.check('remember')) {
-       if(this.cookie.get('remember') == 'true'){
+    if (this.cookie.check("remember")) {
+      if (this.cookie.get("remember") == "true") {
         this.rememberPass = true;
       }
       console.info("cookies:", this.cookie.getAll());
       this.loginEmail.setValue(this.cookie.get("email"));
       this.loginPass.setValue(this.cookie.get("pass"));
-     
     }
-   this.loginForm = new FormGroup({
+    this.loginForm = new FormGroup({
       email: this.loginEmail,
-      password: this.loginPass
+      password: this.loginPass,
     });
   }
   private buildForm() {
@@ -249,31 +248,35 @@ export class RegisterComponent implements OnInit {
     if (this.rememberPass) {
       this.cookie.set("pass", this.loginPass.value);
       this.cookie.set("email", this.loginEmail.value);
-      this.cookie.set('remember','true');
+      this.cookie.set("remember", "true");
     } else {
       this.cookie.deleteAll();
     }
-    this.loginService.postLogin(this.loginForm.value).then((resp: any) =>{
-      console.log(resp);
-      if (resp.status == "error") {
-        Swal.fire("Oops", resp.error_message, "error");
-      } else {
-        Swal.fire(
-          "Good job!",
-          "You signed in successfuly",
-          "success"
-        ).then(() => {
-          localStorage.setItem("user_data", JSON.stringify(resp.data));
-          this.router.navigate(["/home"]);
-        });
-      }
-
-    }).catch((err:any)=>{
-      console.log(JSON.stringify(err));
-      Swal.fire("Oops", "error");
-    })
-
-
-    
+    this.loginService
+      .postLogin(this.loginForm.value)
+      .then((resp: any) => {
+        console.log(resp);
+        if (resp.status == "error") {
+          Swal.fire("Oops", resp.error_message, "error");
+        } else {
+          Swal.fire("Good job!", "You signed in successfuly", "success").then(
+            () => {
+              localStorage.setItem("user_data", JSON.stringify(resp.data));
+              if (this.cookie.check("ruta")) {
+                let ruta = this.cookie.get("ruta");
+                this.cookie.delete("ruta");
+                console.log(ruta);
+                this.router.navigateByUrl(ruta);
+              } else {
+                this.router.navigate(["/home/products"]);
+              }
+            }
+          );
+        }
+      })
+      .catch((err: any) => {
+        console.log(JSON.stringify(err));
+        Swal.fire("Oops", "error");
+      });
   }
 }
