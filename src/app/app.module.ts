@@ -31,7 +31,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './home/home/home.component';
 import { SharedModule } from "./shared/shared.module";
 import { ListProductsComponent } from './home/home/list-products/list-products.component';
-
+import { RouterModule } from '@angular/router'
 @NgModule({
   declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent],
   imports: [
@@ -41,7 +41,7 @@ import { ListProductsComponent } from './home/home/list-products/list-products.c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    RouterModule,
     // Angular Material modules
     MatInputModule,
     MatIconModule,

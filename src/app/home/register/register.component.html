@@ -16,9 +16,7 @@
                       placeholder="Email"
                       [formControl]="loginEmail"
                     />
-                    <mat-error *ngIf="loginEmail.invalid"
-                      >Email is required</mat-error
-                    >
+                    <mat-error *ngIf="loginEmail.invalid">Email is required</mat-error>
                     <mat-icon matSuffix>email</mat-icon>
                   </mat-form-field>
                 </div>

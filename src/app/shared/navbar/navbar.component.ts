@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
       console.log(data);
       
       this.name = data.customer.first_name;
+    } else {
+      this.name = 'Log in'
     }
   }
 

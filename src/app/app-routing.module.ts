@@ -15,8 +15,8 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent 
   },
   {
-    path: 'home', component: HomeComponent, canActivate: [LoginGuard], children: [
-      {path: 'products', component: ListProductsComponent, canActivate: [LoginGuard]}
+    path: 'home', component: HomeComponent, children: [
+      {path: 'products', component: ListProductsComponent}
     ]
   },
   {
