@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+   
+    <div class="col-12 text-center">
+      <mat-form-field class="w-100">
+        <input
+          name="termino"
+          type="text"
+          placeholder="Search"
+          matInput
+          (ngModelChange)="getProducts()"
+          [(ngModel)]="searchItem"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+
+  <div class="row" style="margin: 20px;">
+    <div class="col-2">
+      <picture>
+        <img class="img-fluid" mat-card-image  style="margin-top: 5px" src="../../../../assets/images/1039789.jpg" alt="Photo of a product" />
+      </picture>
+      
+    </div>
+    <div class="col-4">
+      <picture><img mat-card-image class="img-fluid" style="margin-top: 5px" src="../../../../assets/images/37614-billie-eilish.jpg"
+        alt="Photo of a product" /></picture>
+    </div>
+    <div class="col-4">
+      <h1 style="color: #6f42c1;">Paquete micro</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, accusantium culpa possimus sapiente aut eligendi harum officia quidem ipsa perspiciatis nam iure ex facilis similique. Doloremque nostrum earum odio!</p>
+      <div>
+        <!-- variable -->
+      </div>
+    </div>
+    <div class="col-2">
+      <h3 style="text-align: right;">$15000</h3>
+      <p></p>
+  <button class="w-100" type="button"    mat-raised-button  color="primary" mat-button>Agregar al carrito</button>
+    </div>
+  </div>
+  
+

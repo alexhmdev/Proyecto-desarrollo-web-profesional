@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
 import { HomeComponent } from './home/home/home.component';
 import { ListProductsComponent } from './home/home/list-products/list-products.component';
+import { ProductComponent } from './home/home/product/product.component';
 import { RegisterComponent } from './home/register/register.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'home', component: HomeComponent, children: [
-      {path: 'products', component: ListProductsComponent}
+      {path: 'products', component: ListProductsComponent},
+      {path: 'product', component: ProductComponent}
     ]
   },
   {
