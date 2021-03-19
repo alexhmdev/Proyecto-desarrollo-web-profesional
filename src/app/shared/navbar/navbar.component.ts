@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
+import { CarritoService } from 'src/app/services/carrito.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,8 +12,8 @@ export class NavbarComponent implements OnInit {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;  
    showFiller = false;
   name: any;
-  @Input() cartItems: number = 0;
-  constructor( private router: Router, private dialog: MatDialog) { }
+  cartItems: number = 0;
+  constructor( private router: Router, private dialog: MatDialog, private carrito: CarritoService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem("user_data")){
@@ -21,6 +22,10 @@ export class NavbarComponent implements OnInit {
       console.log(data);
       
       this.name = data.customer.first_name;
+      this.carrito.postDetails({session_id:data.session_id}).then((resp:any) => {
+        console.log(resp)
+        this.cartItems = resp.data.items_quantity
+      })
     } else {
       this.name = 'Log in'
     }
