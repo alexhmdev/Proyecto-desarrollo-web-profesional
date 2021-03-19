@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;  
    showFiller = false;
   name: any;
-
+  @Input() cartItems: number = 0;
   constructor( private router: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {

@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from "@angular/material/sidenav";
+import {MatBadgeModule} from '@angular/material/badge'; 
 import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [NavbarComponent,DialogConfirmMenu],
@@ -20,6 +21,7 @@ import { RouterModule } from "@angular/router";
     MatMenuModule,
     MatDialogModule,
     MatSidenavModule,
+    MatBadgeModule,
     RouterModule
   ],
   exports: [

@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ThemePalette } from "@angular/material/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
+import { CarritoService } from "src/app/services/carrito.service";
 import { CategoriaService } from "src/app/services/categories.service";
 import { ProductsService } from "src/app/services/products.service";
 
@@ -15,76 +18,50 @@ export interface Task {
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  searchItem: string = "";
-  options = ["comida", "bebidas", "ejemplo"];
-  task: Task = {
-    name: "Indeterminate",
-    completed: false,
-    color: "primary",
-    subtasks: [],
-  };
-  categories: any;
-  products = [];
-  categoriesFilter: any[];
+  
+  idProduct: any;
+  productDetail: any;
+  itemQuantity: number = 1;
   constructor(
+    private carrito: CarritoService,
     private product: ProductsService,
-    private category: CategoriaService
-  ) {}
+    private routerLink: ActivatedRoute,
+    private router: Router,
+    private cookie: CookieService
+    ) {
+    this.idProduct = this.routerLink.snapshot.queryParamMap.get('idProducto')
+   
 
+    console.info(this.idProduct)
+    }
+  
   ngOnInit(): void {
-    this.getCategories();
-    this.getProducts();
+    this.obtenerProducto();
   }
 
-  getCategories() {
-    this.category
-      .getAll()
-      .then((resp: any) => {
-        resp.data.categories.forEach((element) => {
-          this.task.subtasks.push({
-            name: element.description,
-            completed: false,
-            color: "accent",
-          });
-        });
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
-  }
+ obtenerProducto(){
+   this.product.getProductsDetails(this.idProduct).then((resp:any) => {
+     console.log(resp)
+     this.productDetail = resp.data.items[0]
+   }).catch((err: any) =>{
 
-  getProducts() {
-    setTimeout(() => {
-      this.product
-        .getProducts(this.searchItem)
-        .then((resp: any) => {
-          if (!resp.data) {
-            console.log("no hay mas datos");
-          }
-          // console.log(resp);
-          this.products = resp.data.items;
-        })
-        .catch((err: any) => {
-          console.error(err);
-        });
-    }, 100);
-  }
-
-  getProductByCategory() {
-    let arrFilter = [];
-    this.task.subtasks.forEach((element, index) => {
-      if (element.completed) {
-        arrFilter.push(element.name);
-      } else {
-        arrFilter.splice(index, 1);
-      }
-    });
-    console.info(arrFilter);
-    this.product
-      .getProductsByCategory(arrFilter)
-      .then((resp: any) => {
-        this.products = resp.data.items;
-      })
-      .catch((err: any) => {});
-  }
+   });
+ }
+ agregarCarrito(){
+   if(localStorage.getItem('user_data')){
+     let user_data = JSON.parse(localStorage.getItem('user_data'));
+     console.log(user_data)
+     let body = {session_id: user_data.session_id, item_id: this.idProduct, item_quantity: this.itemQuantity }
+     console.info(body)
+   this.carrito.postCart(body).then((resp: any) => {
+    console.warn(resp);
+    this.router.navigateByUrl('home/products')
+   }).catch((err) => {
+     console.error(err)
+   })
+   } else {
+    this.cookie.set('ruta','home/products/'+ this.idProduct);
+     this.router.navigateByUrl('register');
+   }
+ }
 }

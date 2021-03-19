@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment.prod";
 export class ProductsService {
   url = `${environment.url}/catalogs/items/by_text/`;
   urlB = `${environment.url}/catalogs/items/by_category/`;
-  urlC = `${environment.url}/catalogs/items/item_details/`;
+  urlC = `${environment.url}/catalogs/item_details/`;
 
   constructor(private http: HttpClient) { }
 

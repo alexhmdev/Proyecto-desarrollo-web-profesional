@@ -42,7 +42,8 @@
           <mat-card>
             <div class="row">
               <div class="col">
-                <mat-card-title>{{ item.short_description }}</mat-card-title>
+                <mat-card-title > <a [routerLink]="['/home/product']" [queryParams]="{idProducto: item.product_id}"
+                  routerLinkActive="router-link-active" style="color: black;">{{ item.short_description }}</a></mat-card-title>
               </div>
             </div>
 

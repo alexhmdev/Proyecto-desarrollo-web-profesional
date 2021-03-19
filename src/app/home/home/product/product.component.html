@@ -8,8 +8,6 @@
           type="text"
           placeholder="Search"
           matInput
-          (ngModelChange)="getProducts()"
-          [(ngModel)]="searchItem"
         />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
@@ -17,28 +15,43 @@
   </div>
 </div>
 
-  <div class="row" style="margin: 20px;">
+  <div class="row" style="margin: 20px;" >
     <div class="col-2">
-      <picture>
-        <img class="img-fluid" mat-card-image  style="margin-top: 5px" src="../../../../assets/images/1039789.jpg" alt="Photo of a product" />
+      <div class="row"*ngFor="let img of productDetail.images_gallery">
+        <div class="col-3"></div>
+        <div class="col-6">
+           <picture>
+        <img class="img-fluid" mat-card-image  style="margin-top: 5px" [src]="img.image" alt="Photo of a product" />
       </picture>
+      <div class="col-3"></div>
+        </div>
+      </div>
+     
       
     </div>
     <div class="col-4">
-      <picture><img mat-card-image class="img-fluid" style="margin-top: 5px" src="../../../../assets/images/37614-billie-eilish.jpg"
+      <picture><img mat-card-image class="img-fluid" style="margin-top: 5px" [src]="productDetail.images_large"
         alt="Photo of a product" /></picture>
     </div>
     <div class="col-4">
-      <h1 style="color: #6f42c1;">Paquete micro</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, accusantium culpa possimus sapiente aut eligendi harum officia quidem ipsa perspiciatis nam iure ex facilis similique. Doloremque nostrum earum odio!</p>
-      <div>
-        <!-- variable -->
+      <h1 style="color: #6f42c1;">{{productDetail.short_description}}</h1>
+      <p>{{productDetail.long_description}}</p>
+      <div [innerHTML]="productDetail.html_details">
+        
       </div>
     </div>
-    <div class="col-2">
-      <h3 style="text-align: right;">$15000</h3>
-      <p></p>
-  <button class="w-100" type="button"    mat-raised-button  color="primary" mat-button>Agregar al carrito</button>
+    <div class="col-2 text-right">
+      <h3 >${{productDetail.price}}</h3>
+      <div class="float-right">
+        <div class="input-group">
+          <p class="mt-3 mr-2">Cont:</p> 
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" [(ngModel)]="itemQuantity">
+          </mat-form-field>
+        </div>
+      </div>
+  <button class="w-100" type="button"    mat-raised-button  color="primary" mat-button (click)="agregarCarrito()">Agregar al carrito</button>
     </div>
   </div>
   

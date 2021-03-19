@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment.prod'
 })
 export class CarritoService {
 
-  url = `${environment.url}/cart/add_item/`;
-  urlB = `${environment.url}/cart/get_details`;
-  urlC = `${environment.url}/cart/remove_all`
+  url = `${environment.url}/cart/add_item`;
+  urlB = `${environment.url}/cart/get_details/`;
+  urlC = `${environment.url}/cart/remove_all/`
 
   constructor(private http: HttpClient) { }
 
