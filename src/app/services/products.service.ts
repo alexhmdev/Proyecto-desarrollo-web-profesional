@@ -8,8 +8,9 @@ import { environment } from "src/environments/environment.prod";
 export class ProductsService {
   url = `${environment.url}/catalogs/items/by_text/`;
   urlB = `${environment.url}/catalogs/items/by_category/`;
+  urlC = `${environment.url}/catalogs/items/item_details/`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProducts(licencia) {
     // if (licencia == undefined) {
@@ -26,5 +27,9 @@ export class ProductsService {
     let categorias = categories.toString();
     console.log(categorias.replace(/,/g, ";"));
     return this.http.get(this.urlB + categorias.replace(/,/g, ";")).toPromise();
+  }
+
+  getProductsDetails(idProducto) {
+    return this.http.get(this.urlC + idProducto).toPromise();
   }
 }
