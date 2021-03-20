@@ -60,7 +60,7 @@ export class ProductComponent implements OnInit {
         .postCart(body)
         .then((resp: any) => {
           console.warn(resp);
-          this.router.navigateByUrl("home/products");
+        location.replace("home/products");
         })
         .catch((err) => {
           console.error(err);

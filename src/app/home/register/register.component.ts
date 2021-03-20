@@ -250,7 +250,9 @@ export class RegisterComponent implements OnInit {
       this.cookie.set("email", this.loginEmail.value);
       this.cookie.set("remember", "true");
     } else {
-      this.cookie.deleteAll();
+      this.cookie.delete("pass");
+      this.cookie.delete("email");
+      this.cookie.delete("remember");
     }
     this.loginService
       .postLogin(this.loginForm.value)
