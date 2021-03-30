@@ -14,13 +14,13 @@ const routes: Routes = [
     path: '', redirectTo: 'home/products', pathMatch: 'full'
   },
   {
-    path: 'register', component: RegisterComponent 
+    path: 'register', component: RegisterComponent
   },
   {
     path: 'home', component: HomeComponent, children: [
-      {path: 'products', component: ListProductsComponent},
-      {path: 'product', component: ProductComponent},
-      {path: 'card-crud', component: CarCrudComponent }
+      { path: 'products', component: ListProductsComponent },
+      { path: 'product', component: ProductComponent },
+      { path: 'cart', component: CarCrudComponent }
     ]
   },
   {
