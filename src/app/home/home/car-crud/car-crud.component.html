@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <mat-form-field class="w-100">
+                <input name="termino" type="text" placeholder="Search" matInput (ngModelChange)="getProducts()"
+                    [(ngModel)]="searchItem" />
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    </div>
+   
+    <div class="row">
+        <div class="col" style="margin: 0px 25px 0px;">
+            <h1>Carrito de compras</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <h2 style="margin: 0px 25px 0px; color: #6f42c1;">Producto/Servicio</h2>
+            <div class="row">
+                <div class="col-12 ">
+                 <div class="row">
+                     <div class="col-2 text-center" style="color:#dc3545; margin-top: 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                        </svg>
+                     </div>
+                     <div class="col-3 text-center">
+                        <img style="margin: 0px 25px 0px;" mat-card-image style="margin-top: 5px" [src]="" alt="Photo of a product" />
+                     </div>
+                    <div class="col-7">
+                        <p style="margin-top: 15px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo odio delectus obcaecati
+                            quis, culpa cumque beatae, eaque facere natus ex dolorem temporibus assumenda vero perferendis quo earum. Sequi,
+                            nulla impedit?</p>
+                    
+                    </div>
+                 </div>
+                   
+                </div>
+              
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-3">
+                    <h2 style="color: #6f42c1;">P. Unitario</h2>
+                    <h3>$22.990.00</h3>
+                </div>
+                <div class="col-5">
+                    <h2 style="color: #6f42c1;">Cantidad</h2>
+                    <mat-form-field>
+                        <mat-label>Quantity</mat-label>
+                        <!-- <input matInput type="number" [(ngModel)]="itemQuantity"> -->
+                        <input matInput type="number" >
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <h2 style="color: #6f42c1;">Sub. Total</h2>
+                        <h3>$22.990.00</h3>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-3">
+            <h2 style="color: #6f42c1;">Resumen de tu carrito</h2>
+            <div class="row">
+                   
+                <div class="col-6">
+                   
+                    <h3>Sub Total </h3>
+                    <h3>IVA </h3>
+                    <h3>Total </h3>
+                </div>
+                <div class="col-6">
+            
+                <h3>$22.990.00</h3>
+                <h3>$22.990.00</h3>
+                <h3>$22.990.00</h3>
+                </div>
+            </div>
+            <div class="row">
+               
+                <div class="col-10">
+                    <button class="w-100" type="button" mat-raised-button color="primary" mat-button>Proceder el pago</button>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            
+            <!-- <button class="w-100" type="button" mat-raised-button color="primary" mat-button (click)="agregarCarrito()">Agregar alcarrito</button> -->
+        </div>
+    </div>

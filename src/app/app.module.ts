@@ -33,9 +33,10 @@ import { SharedModule } from "./shared/shared.module";
 import { ListProductsComponent } from './home/home/list-products/list-products.component';
 import { ProductComponent } from './home/home/product/product.component';
 import { RouterModule } from '@angular/router';
+import { CarCrudComponent } from './home/home/car-crud/car-crud.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
+import { CarCrudComponent } from './home/home/car-crud/car-crud.component';
 import { HomeComponent } from './home/home/home.component';
 import { ListProductsComponent } from './home/home/list-products/list-products.component';
 import { ProductComponent } from './home/home/product/product.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, children: [
       {path: 'products', component: ListProductsComponent},
-      {path: 'product', component: ProductComponent}
+      {path: 'product', component: ProductComponent},
+      {path: 'card-crud', component: CarCrudComponent }
     ]
   },
   {
