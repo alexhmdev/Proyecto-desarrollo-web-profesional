@@ -65,8 +65,12 @@ export class ListProductsComponent implements OnInit {
       this.product
         .getProducts(termino ? termino :  this.searchItem ? this.searchItem : '')
         .then((resp: any) => {
+          this.task.subtasks.forEach((element, index) => {
+            element.completed = false;
+          });
           if (!resp.data) {
             console.log("no hay mas datos");
+            this.products = []
           }
           // console.log(resp);
           this.products = resp.data.items;

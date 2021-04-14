@@ -146,7 +146,10 @@ export class RegisterComponent implements OnInit {
         .postRegister(this.registerForm.value)
         .then((resp: any) => {
           console.log(resp);
-          Swal.fire("Good job!", "Registered correctly!", "success");
+          Swal.fire("¡Listo!", "Te has registrado correctamente", "success").then(() => {
+          location.reload()
+
+          })
         })
         .catch((err: any) => {
           console.error(err);
@@ -261,7 +264,7 @@ export class RegisterComponent implements OnInit {
         if (resp.status == "error") {
           Swal.fire("Oops", resp.error_message, "error");
         } else {
-          Swal.fire("Good job!", "You signed in successfuly", "success").then(
+          Swal.fire("Bienvenido", "Disfruta de nuestros servicios.", "success").then(
             () => {
               localStorage.setItem("user_data", JSON.stringify(resp.data));
               if (this.cookie.check("ruta")) {

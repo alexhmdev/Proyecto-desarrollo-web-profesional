@@ -25,8 +25,8 @@ export class CarritoService {
     return this.http.post(this.urlB, session_id).toPromise();
   }
 
-  deleteAll(session_id: any) {
-    return this.http.delete(this.urlC, session_id).toPromise();
+  deleteAll(body: any) {
+    return this.http.request('delete',this.urlC, {body}).toPromise();
   }
 
   putCart(body: any) {

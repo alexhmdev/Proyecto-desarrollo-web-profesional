@@ -96,6 +96,28 @@ export class CarCrudComponent implements OnInit {
    
   }
 
+  clearCart(){
+    const dialogRef = this.dialog.open(DialogConfirmMenu, {
+        restoreFocus: false,
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == true){
+          this.carrito.deleteAll({session_id: this.sessionId}).then((resp: any) => {
+            console.log(resp);
+            this.getCart(this.sessionId);
+            this.getCarNav = true;
+            setTimeout(() => {
+              this.getCarNav = false;
+            }, 500);
+    }).catch((err: any) => {
+      console.error(err);
+      
+    });
+        }
+      });
+   
+  }
+
 }
 @Component({
   selector: "dialog-from-menu-dialog",

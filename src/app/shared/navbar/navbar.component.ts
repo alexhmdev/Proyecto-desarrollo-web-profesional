@@ -77,7 +77,10 @@ export class NavbarComponent implements OnInit {
       } 
       else {this.router.navigate(['/home/products'], {queryParams: {termino: this.value}})}
     } else if(event === "Search") {
-      this.salida.emit(this.value)
+      if(this.router.url === '/home/products' || this.router.url.substring(0,14) === "/home/products"){
+        this.salida.emit(this.value)
+      } 
+      else {this.router.navigate(['/home/products'], {queryParams: {termino: this.value}})}
     }
   }
   openDialog() {
