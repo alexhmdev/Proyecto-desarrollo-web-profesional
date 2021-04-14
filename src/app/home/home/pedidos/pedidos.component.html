@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="p-5">
+    <div class="row">
+        <div class="col">
+            <h2>Resumen de tu pedido</h2>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3 style="color: #6f42c1;">Resumen de productos y servicios</h3>
+            </div>
+            <div class="col-4 text-cemter">
+                <h3 style="color: #6f42c1;">Total de tu compra</h3>
+                <br>
+                <label>Subtotal: <strong></strong></label>
+                <br>
+                <label>IVA: <strong></strong></label>
+                <br>
+                <label>Total: <strong></strong></label>
+            </div>
+            <div class="col-4">
+                <h3 style="color: #6f42c1;">Opciones de pago</h3>
+                <div class="row">
+                    <div class="col-8">
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                    </div>
+                </div>
+               
+                
+            </div>
+        </div>
+  
+</div>
+
+                

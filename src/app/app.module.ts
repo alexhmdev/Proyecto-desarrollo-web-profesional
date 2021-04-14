@@ -36,9 +36,11 @@ import { RouterModule } from '@angular/router';
 import { CarCrudComponent, DialogConfirmMenu } from './home/home/car-crud/car-crud.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
+import { PedidosComponent } from "./home/home/pedidos/pedidos.component";
+import { NgxPayPalModule } from "ngx-paypal";
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent, DialogConfirmMenu],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent, DialogConfirmMenu, PedidosComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,7 +66,9 @@ import { MatMenuModule } from "@angular/material/menu";
     RecaptchaModule,
     // Flex layout
     FlexLayoutModule,
-    SharedModule
+    SharedModule,
+    // Paypal module
+    NgxPayPalModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

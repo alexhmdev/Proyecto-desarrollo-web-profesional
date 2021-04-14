@@ -48,6 +48,9 @@ export class NavbarComponent implements OnInit {
       this.name = "Log in";
     }
   }
+  home(){
+    this.router.navigate(['/home/products'])
+  }
   checkSession() {
     if (!localStorage.getItem("user_data")) {
       this.name = "Log in";
