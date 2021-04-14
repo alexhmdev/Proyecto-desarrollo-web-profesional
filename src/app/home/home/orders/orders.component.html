@@ -10,7 +10,7 @@
             <h2 style="color: #6f42c1;">Tienes {{ordenesContados}} pedidos.</h2>
 
 
-            <table class="table"  *ngIf="ordenes">
+            <table class="table" *ngIf="ordenes">
                 <thead>
                     <tr>
                         <th scope="col" class="text-center">Fecha de compra</th>
@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let orden of ordenes">
-                        <td class="text-center">{{orden.date_order | date:'yyyy-mm-dd'}}</td>
+                        <td class="text-center">{{orden.date_order | date:'yyyy-MM-dd'}}</td>
                         <td class="text-center">${{orden.total}}</td>
                         <td class="text-center">{{orden.status}}</td>
                         <td class="text-center">{{orden.paypal_order_id}}</td>
@@ -40,7 +40,7 @@
 
             </table>
             <table class="table" *ngIf="!ordenes || ordenes === undefined || ordenes.length===0">
-                <tbody >
+                <tbody>
                     <tr>
                         <td colspan="14">
                             <div class="alert-dismissible text-center" style="padding: .75rem 1.25rem;">
