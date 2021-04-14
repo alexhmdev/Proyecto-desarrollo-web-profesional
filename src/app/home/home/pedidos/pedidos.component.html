@@ -1,39 +1,41 @@
 <app-navbar [getCart]="getCarNav"></app-navbar>
 <div class="p-5" *ngIf="mostrarPago">
-    <div class="row">
-        <div class="col">
-            <h2>Resumen de tu pedido</h2>
-        </div>
-        </div>
+    <div *ngIf="data">
         <div class="row">
-            <div class="col-4">
-                <h3 style="color: #6f42c1;">Resumen de productos y servicios</h3>
-                <br>
-                <div *ngFor="let product of data.items">
-                    <p>{{product.quantity}} x {{product.short_description}}</p>
-                </div>
+            <div class="col">
+                <h2>Resumen de tu pedido</h2>
             </div>
-            <div class="col-4 text-center">
-                <h3 style="color: #6f42c1;">Total de tu compra</h3>
-                <br>
-                <label>Subtotal: <strong>${{data.sub_total}}</strong></label>
-                <br>
-                <label>IVA: <strong>${{data.taxes}}</strong></label>
-                <br>
-                <label>Total: <strong>${{data.total}}</strong></label>
             </div>
-            <div class="col-4">
-                <h3 style="color: #6f42c1;">Opciones de pago</h3>
-                <div class="row">
-                    <div class="col-8">
-                        <br>
-                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            <div class="row">
+                <div class="col-4">
+                    <h3 style="color: #6f42c1;">Resumen de productos y servicios</h3>
+                    <br>
+                    <div *ngFor="let product of data.items">
+                        <p>{{product.quantity}} x {{product.short_description}}</p>
                     </div>
                 </div>
-               
-                
+                <div class="col-4 text-center">
+                    <h3 style="color: #6f42c1;">Total de tu compra</h3>
+                    <br>
+                    <label>Subtotal: <strong>${{data.sub_total}}</strong></label>
+                    <br>
+                    <label>IVA: <strong>${{data.taxes}}</strong></label>
+                    <br>
+                    <label>Total: <strong>${{data.total}}</strong></label>
+                </div>
+                <div class="col-4">
+                    <h3 style="color: #6f42c1;">Opciones de pago</h3>
+                    <div class="row">
+                        <div class="col-8">
+                            <br>
+                            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                        </div>
+                    </div>
+                   
+                    
+                </div>
             </div>
-        </div>
+    </div>
   
 </div>
 <app-thanks [venta]="datosCompra" *ngIf="compraExitosa"></app-thanks>

@@ -1,125 +1,121 @@
-<app-navbar [getCart]="getCarNav"> </app-navbar>
+<app-navbar [getCart]="getCarNav"> </app-navbar> 
 
 <h1 style="transform: translateX(50px)">Carrito de compras</h1>
 
-<div *ngIf="details.items" class="row" style="position: relative; z-index: 3;">
-    <div class="col">
-
-    </div>
-    <div class="col ml-2" style="transform: translateX(50px)">
-        <h2 style=" color: #6f42c1;">Producto/Servicio</h2>
-    </div>
-    <div class="col ml-2">
-        <h2 style="color: #6f42c1; transform: translateX(50%);">P. Unitario</h2>
-    </div>
-    <div class="col ml-2" style="transform: translateX(30px);">
-        <h2 style="color: #6f42c1;">Cantidad</h2>
-    </div>
-    <div class="col ">
-        <h2 style="color: #6f42c1;">Sub. Total</h2>
-    </div>
-    <div class="col" style="transform: translateX(-50px);">
-        <h2 style="color: #6f42c1;">Resumen de tu carrito</h2>
-        <div class="row">
-
-            <div class="col-6">
-
-                <h3><b>Sub Total </b></h3>
-                <h3><b>IVA </b></h3>
-                <h3><b>Total </b></h3>
-            </div>
-            <div class="col-6">
-
-                <h3>${{details.sub_total | number}}</h3>
-                <h3>${{details.taxes |number }}</h3>
-                <h3>${{details.total |number }}</h3>
-            </div>
+<div *ngIf="details">
+    <div *ngIf="details.items" class="row" style="position: relative; z-index: 3;">
+        <div class="col">
+    
         </div>
-        <div class="row">
-
-            <div class="col">
-                <button (click)="misPedidos()" class="w-100" type="button" color="primary" mat-raised-button> PAGAR
-                </button>
-            </div>
-            <div class="col mt-2">
-                <button (click)="clearCart()" class="w-100" type="button" color="warn" mat-raised-button> VACIAR
-                    CARRITO
-                </button>
-            </div>
+        <div class="col ml-2" style="transform: translateX(50px)">
+            <h2 style=" color: #6f42c1;">Producto/Servicio</h2>
         </div>
-
-        <!-- <button class="w-100" type="button" mat-raised-button color="primary" mat-button (click)="agregarCarrito()">Agregar alcarrito</button> -->
+        <div class="col ml-2">
+            <h2 style="color: #6f42c1; transform: translateX(50%);">P. Unitario</h2>
+        </div>
+        <div class="col ml-2" style="transform: translateX(30px);">
+            <h2 style="color: #6f42c1;">Cantidad</h2>
+        </div>
+        <div class="col ">
+            <h2 style="color: #6f42c1;">Sub. Total</h2>
+        </div>
+        <div class="col" style="transform: translateX(-50px);">
+            <h2 style="color: #6f42c1;">Resumen de tu carrito</h2>
+            <div class="row">
+    
+                <div class="col-6">
+    
+                    <h3><b>Sub Total </b></h3>
+                    <h3><b>IVA </b></h3>
+                    <h3><b>Total </b></h3>
+                </div>
+                <div class="col-6">
+    
+                    <h3>${{details.sub_total | number}}</h3>
+                    <h3>${{details.taxes |number }}</h3>
+                    <h3>${{details.total |number }}</h3>
+                </div>
+            </div>
+            <div class="row">
+    
+                <div class="col">
+                    <button (click)="misPedidos()" class="w-100" type="button" color="primary" mat-raised-button> PAGAR
+                    </button>
+                </div>
+            </div>
+    
+            <!-- <button class="w-100" type="button" mat-raised-button color="primary" mat-button (click)="agregarCarrito()">Agregar alcarrito</button> -->
+        </div>
     </div>
-</div>
-<div *ngIf="details.items" class="row" style="margin-top: -150px; z-index: 1;">
-    <div class="col">
-        <div class="row" *ngFor="let item of details.items">
-            <div class="col-5">
-
-                <div class="row">
-                    <div class="col-12 ">
-                        <div class="row">
-                            <div class="col-2 text-center"
-                                style="color:#dc3545; margin-top: 60px; position: relative; z-index: 3;">
-                                <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" width="16" height="16"
-                                    fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"
-                                    (click)="deleteProduct(item.product_id)">
-                                    <path
-                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-                                </svg>
-
+    <div *ngIf="details.items" class="row" style="margin-top: -150px; z-index: 1;">
+        <div class="col">
+            <div class="row" *ngFor="let item of details.items">
+                <div class="col-5">
+    
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="row">
+                                <div class="col-2 text-center" style="color:#dc3545; margin-top: 60px; position: relative; z-index: 3;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" width="16" height="16" fill="currentColor"
+                                        class="bi bi-x-circle-fill" viewBox="0 0 16 16"
+                                        (click)="deleteProduct(item.product_id)">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                    </svg>
+    
+                                </div>
+                                <div class="col-3">
+                                    <img  style="margin: 5px 25px 0px; height: 150px;" 
+                                        [src]="item.images_small" alt="Photo of a product" />
+                                </div>
+                                <div class="col-7">
+                                    <strong>{{item.short_description}}</strong>
+                                    <p style="margin-top: 15px; ">{{item.long_description}}</p>
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <img style="margin: 5px 25px 0px; height: 150px;" [src]="item.images_small"
-                                    alt="Photo of a product" />
-                            </div>
-                            <div class="col-7">
-                                <strong>{{item.short_description}}</strong>
-                                <p style="margin-top: 15px; ">{{item.long_description}}</p>
-                            </div>
+    
                         </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="row">
-                    <div class="col-3">
-
-                        <h3>
-                            <b>${{item.price |number }}</b>
-                        </h3>
-                    </div>
-                    <div class="col-5">
-
-                        <mat-form-field style="position: relative; z-index: 3;">
-                            <mat-label>Cantidad</mat-label>
-                            <!-- <input matInput type="number" > -->
-                            <input matInput type="number" [(ngModel)]="item.quantity"
-                                (change)="item.quantity > 1 ? updateQuantity(item.quantity,item.product_id) : updateQuantity(1,item.product_id)">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4" style="transform: translateX(60px);">
-                        <h3><b> ${{item.sub_total |number }} </b></h3>
+    
                     </div>
                 </div>
-
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-3">
+    
+                            <h3>
+                                <b>${{item.price |number }}</b>
+                            </h3>
+                        </div>
+                        <div class="col-5">
+    
+                            <mat-form-field style="position: relative; z-index: 3;">
+                                <mat-label>Cantidad</mat-label>
+                                <!-- <input matInput type="number" > -->
+                                <input matInput type="number" [(ngModel)]="item.quantity"
+                                    (change)="item.quantity > 1 ? updateQuantity(item.quantity,item.product_id) : updateQuantity(1,item.product_id)">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4" style="transform: translateX(60px);">
+                            <h3><b> ${{item.sub_total |number }} </b></h3>
+                        </div>
+                    </div>
+    
+                </div>
+    
             </div>
-
         </div>
+    
     </div>
-
+    <table class="table" *ngIf="!details.items || details.items === undefined">
+        <tbody >
+            <tr>
+                <td colspan="14">
+                    <div class="alert-dismissible text-center" style="padding: .75rem 1.25rem;">
+                        <i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
+                        <h3 style="height: 100%;width: 100%; color: #6f42c1;">NO TIENES PRODUCTOS EN TU CARRITO ☹</h3>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<table class="table" *ngIf="!details.items || details.items === undefined">
-    <tbody>
-        <tr>
-            <td colspan="14">
-                <div class="alert-dismissible text-center" style="padding: .75rem 1.25rem;">
-                    <i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
-                    <h3 style="height: 100%;width: 100%; color: #6f42c1;">NO TIENES PRODUCTOS EN TU CARRITO ☹</h3>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>

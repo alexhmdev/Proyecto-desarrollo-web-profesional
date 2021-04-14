@@ -1,5 +1,6 @@
 <app-navbar> </app-navbar>
 
+<div *ngIf="productDetail">
   <div class="row" style="margin: 20px;" >
     <div class="col-2">
       <div class="row"*ngFor="let img of productDetail.images_gallery">
@@ -39,5 +40,6 @@
   <button class="w-100" type="button"    mat-raised-button  color="primary" mat-button (click)="agregarCarrito()">Agregar al carrito</button>
     </div>
   </div>
+</div>
   
 

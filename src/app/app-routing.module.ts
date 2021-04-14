@@ -23,8 +23,8 @@ const routes: Routes = [
       { path: 'products', component: ListProductsComponent },
       { path: 'product', component: ProductComponent },
       { path: 'cart', component: CarCrudComponent, canActivate: [LoginGuard] },
-      { path: 'pedido', component: PedidosComponent },
-      { path: 'mis-pedidos', component: OrdersComponent },
+      { path: 'pedido', component: PedidosComponent, canActivate: [LoginGuard] },
+      { path: 'mis-pedidos', component: OrdersComponent, canActivate: [LoginGuard] },
     ]
   },
   {
