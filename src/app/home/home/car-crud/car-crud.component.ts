@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
-import { CategoriaService } from 'src/app/services/categories.service';
-import { ProductsService } from 'src/app/services/products.service';
 
 
 @Component({
@@ -11,17 +12,17 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./car-crud.component.css']
 })
 export class CarCrudComponent implements OnInit {
+  @ViewChild("menuTrigger") menuTrigger: MatMenuTrigger;
   searchItem: string = "";
   products = [];
   details: any;
   sessionId: any;
-
+  getCarNav = false;
   constructor(
-    private product: ProductsService,
-    private category: CategoriaService,
     private carrito: CarritoService,
-
+    private dialog: MatDialog
   ) { }
+  
 
   ngOnInit(): void {
     if (localStorage.getItem("user_data")) {
@@ -52,23 +53,52 @@ export class CarCrudComponent implements OnInit {
     await this.carrito.putCart(body).then((resp: any) => {
       console.info(resp);
       this.getCart(this.sessionId);
+      this.getCarNav = true;
+      setTimeout(() => {
+        this.getCarNav = false;
+      }, 500);
     }).catch((err: any) => {
       console.error(err);
     });
   }
 
   async deleteProduct(itemId: any) {
-    const body = await {
-      session_id: this.sessionId,
-      item_id: itemId == null ? 1 : itemId,
-    };
-    console.log(body);
-    await this.carrito.deleteCart(body).then((resp: any) => {
-      console.info(resp);
-      this.getCart(this.sessionId);
-    }).catch((err: any) => {
-      console.error(err);
-    });
+      const dialogRef = this.dialog.open(DialogConfirmMenu, {
+        restoreFocus: false,
+      });
+  
+      // Manually restore focus to the menu trigger since the element that
+      // opens the dialog won't be in the DOM any more when the dialog closes.
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == true){
+          const body =  {
+            session_id: this.sessionId,
+            item_id: itemId == null ? 1 : itemId,
+          };
+          console.log(body);
+           this.carrito.deleteCart(body).then((resp: any) => {
+            console.info(resp);
+            this.getCart(this.sessionId);
+            this.getCarNav = true;
+            setTimeout(() => {
+              this.getCarNav = false;
+            }, 500);
+          }).catch((err: any) => {
+            console.error(err);
+          });
+        }
+      });
+   
   }
 
+}
+@Component({
+  selector: "dialog-from-menu-dialog",
+  templateUrl: "dialog-confirm-logout.html",
+})
+export class DialogConfirmMenu {
+  constructor(private router: Router) {}
+  confirm(){
+    return true
+  }
 }

@@ -1,12 +1,27 @@
 <p>
   <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+      <mat-icon>home</mat-icon>
     </button>
-    <span>My App</span>
+    <span>Store Utags</span>
     <span class="example-spacer"></span>
+    <mat-form-field class="title-center">
+      <mat-label *ngIf="!value">Search</mat-label>
+      <input matInput type="text" [(ngModel)]="value" (keydown)="searchItem($event)">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    
+    <button (click)="searchItem('Search')" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon matSuffix>search</mat-icon>
+    </button>
+
+    <span class="example-spacer"></span>
+    
     <mat-label *ngIf="name == 'Log in'" style="cursor: pointer" [routerLink]="['/register']">{{ name }}</mat-label>
     <mat-label *ngIf="name != 'Log in'">{{ name }}</mat-label>
+                  
     <button *ngIf="name != 'Log in'" mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger
       class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>account_circle</mat-icon>
@@ -27,3 +42,4 @@
     </mat-menu>
   </mat-toolbar>
 </p>
+

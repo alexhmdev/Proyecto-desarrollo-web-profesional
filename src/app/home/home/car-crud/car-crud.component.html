@@ -1,13 +1,5 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            <mat-form-field class="w-100">
-                <input name="termino" type="text" placeholder="Search" matInput [(ngModel)]="searchItem" />
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-        </div>
-    </div>
-</div>
+<app-navbar [getCart]="getCarNav"> </app-navbar> 
+
 <h1 style="transform: translateX(50px)">Carrito de compras</h1>
 
 <div class="row">
@@ -18,7 +10,7 @@
         <h2 style=" color: #6f42c1;">Producto/Servicio</h2>
     </div>
     <div class="col ml-2">
-        <h2 style="color: #6f42c1; transform: translateX(90px);">P. Unitario</h2>
+        <h2 style="color: #6f42c1; transform: translateX(50%);">P. Unitario</h2>
     </div>
     <div class="col ml-2" style="transform: translateX(30px);">
         <h2 style="color: #6f42c1;">Cantidad</h2>
@@ -62,8 +54,8 @@
                 <div class="row">
                     <div class="col-12 ">
                         <div class="row">
-                            <div class="col-2 text-center" style="color:#dc3545; margin-top: 60px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            <div class="col-2 text-center" style="color:#dc3545; margin-top: 60px; ">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" width="16" height="16" fill="currentColor"
                                     class="bi bi-x-circle-fill" viewBox="0 0 16 16"
                                     (click)="deleteProduct(item.product_id)">
                                     <path
@@ -71,8 +63,8 @@
                                 </svg>
 
                             </div>
-                            <div class="col-3 text-center">
-                                <img height="150px" style="margin: 0px 25px 0px;" mat-card-image style="margin-top: 5px"
+                            <div class="col-3">
+                                <img  style="margin: 5px 25px 0px; height: 150px;" 
                                     [src]="item.images_small" alt="Photo of a product" />
                             </div>
                             <div class="col-7">
@@ -99,7 +91,7 @@
                             <mat-label>Cantidad</mat-label>
                             <!-- <input matInput type="number" > -->
                             <input matInput type="number" [(ngModel)]="item.quantity"
-                                (ngModelChange)="updateQuantity(item.quantity,item.product_id)">
+                                (change)="item.quantity > 1 ? updateQuantity(item.quantity,item.product_id) : updateQuantity(1,item.product_id)">
                         </mat-form-field>
                     </div>
                     <div class="col-4" style="transform: translateX(60px);">

@@ -16,3 +16,8 @@
 .example-sidenav {
   padding: 20px;
 }
+
+.title-center {
+  flex: 1 1 auto;
+  width: 55%;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ThemePalette } from "@angular/material/core";
+import { ActivatedRoute } from "@angular/router";
 import { CategoriaService } from "src/app/services/categories.service";
 import { ProductsService } from "src/app/services/products.service";
 
@@ -28,10 +29,15 @@ export class ListProductsComponent implements OnInit {
   categoriesFilter: any[];
   constructor(
     private product: ProductsService,
-    private category: CategoriaService
-  ) {}
+    private category: CategoriaService,
+    private routerLink: ActivatedRoute
+    ) {
+    this.searchItem = this.routerLink.snapshot.queryParamMap.get("termino")
+    
+    }
 
   ngOnInit(): void {
+    
     this.getCategories();
     this.getProducts();
   }
@@ -53,10 +59,11 @@ export class ListProductsComponent implements OnInit {
       });
   }
 
-  getProducts() {
-    setTimeout(() => {
+  getProducts(termino?: any) {
+    console.log(termino, this.searchItem);
+    if(termino == '') this.searchItem = ''
       this.product
-        .getProducts(this.searchItem)
+        .getProducts(termino ? termino :  this.searchItem ? this.searchItem : '')
         .then((resp: any) => {
           if (!resp.data) {
             console.log("no hay mas datos");
@@ -67,7 +74,6 @@ export class ListProductsComponent implements OnInit {
         .catch((err: any) => {
           console.error(err);
         });
-    }, 100);
   }
 
   getProductByCategory() {

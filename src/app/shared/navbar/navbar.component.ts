@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { MatMenuTrigger } from "@angular/material/menu";
 import { CarritoService } from "src/app/services/carrito.service";
@@ -10,16 +10,27 @@ import { NavbarService } from "src/app/services/navbar.service";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
+  
   @ViewChild("menuTrigger") menuTrigger: MatMenuTrigger;
+  @Input() set  getCart(value){
+    if(value){
+      this.ngOnInit()
+    }
+  }
+  @Output() salida = new EventEmitter()
   showFiller = false;
+  value:any
   name: any;
   cartItems: number = 0;
   constructor(
     private router: Router,
+    private routerLink: ActivatedRoute,
     private dialog: MatDialog,
     private carrito: CarritoService,
     private navService: NavbarService
-  ) {}
+  ) {
+    this.value = this.routerLink.snapshot.queryParamMap.get("termino") ? this.routerLink.snapshot.queryParamMap.get("termino") : '';
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem("user_data")) {
@@ -47,6 +58,24 @@ export class NavbarComponent implements OnInit {
     let user_data = JSON.parse(localStorage.getItem("user_data"));
     console.log(user_data.session_id);
     this.carrito.deleteAll({ session_id: user_data.session_id });
+  }
+
+  clearSearch(){
+    this.value = '';
+    if(this.router.url === '/home/products' || this.router.url.substring(0,14) === "/home/products"){
+    this.searchItem({"key": "Enter"})
+    } 
+  }
+  searchItem(event: any){
+    
+    if (event.key === "Enter") {
+      if(this.router.url === '/home/products' || this.router.url.substring(0,14) === "/home/products"){
+        this.salida.emit(this.value)
+      } 
+      else {this.router.navigate(['/home/products'], {queryParams: {termino: this.value}})}
+    } else if(event === "Search") {
+      this.salida.emit(this.value)
+    }
   }
   openDialog() {
     const dialogRef = this.dialog.open(DialogConfirmMenu, {

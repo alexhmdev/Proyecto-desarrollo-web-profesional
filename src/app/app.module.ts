@@ -33,10 +33,12 @@ import { SharedModule } from "./shared/shared.module";
 import { ListProductsComponent } from './home/home/list-products/list-products.component';
 import { ProductComponent } from './home/home/product/product.component';
 import { RouterModule } from '@angular/router';
-import { CarCrudComponent } from './home/home/car-crud/car-crud.component';
+import { CarCrudComponent, DialogConfirmMenu } from './home/home/car-crud/car-crud.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent, DialogConfirmMenu],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,6 +58,8 @@ import { CarCrudComponent } from './home/home/car-crud/car-crud.component';
     MatGridListModule,
     MatExpansionModule,
     MatAutocompleteModule,
+    MatDialogModule,
+    MatMenuModule,
     // Captcha
     RecaptchaModule,
     // Flex layout

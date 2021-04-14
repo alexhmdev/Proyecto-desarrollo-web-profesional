@@ -31,6 +31,6 @@ export class CarritoService {
   }
 
   deleteCart(body: any) {
-    return this.http.delete(this.urlE, body).toPromise();
+    return this.http.request('delete',this.urlE, {body}).toPromise();
   }
 }

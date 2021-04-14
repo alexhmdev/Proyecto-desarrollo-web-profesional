@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'home', component: HomeComponent, children: [
       { path: 'products', component: ListProductsComponent },
       { path: 'product', component: ProductComponent },
-      { path: 'cart', component: CarCrudComponent }
+      { path: 'cart', component: CarCrudComponent, canActivate: [LoginGuard] }
     ]
   },
   {

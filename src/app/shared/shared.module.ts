@@ -10,9 +10,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from "@angular/material/sidenav";
 import {MatBadgeModule} from '@angular/material/badge'; 
 import { RouterModule } from "@angular/router";
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [NavbarComponent,DialogConfirmMenu],
   imports: [
+    FormsModule,
     CommonModule,
     MatToolbarModule,
     MatIconModule,
@@ -22,10 +25,12 @@ import { RouterModule } from "@angular/router";
     MatDialogModule,
     MatSidenavModule,
     MatBadgeModule,
-    RouterModule
+    MatFormFieldModule,
+    RouterModule,
+    MatInputModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ]
 })
 export class SharedModule { }
