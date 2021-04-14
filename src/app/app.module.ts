@@ -38,9 +38,11 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
 import { PedidosComponent } from "./home/home/pedidos/pedidos.component";
 import { NgxPayPalModule } from "ngx-paypal";
+import { ThanksComponent } from "./home/home/thanks/thanks.component";
+import { OrdersComponent } from './home/home/orders/orders.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent, DialogConfirmMenu, PedidosComponent],
+  declarations: [AppComponent, RegisterComponent, NotFoundComponent, HomeComponent, ListProductsComponent, ProductComponent, CarCrudComponent, DialogConfirmMenu, PedidosComponent, ThanksComponent, OrdersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

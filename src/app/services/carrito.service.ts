@@ -12,6 +12,8 @@ export class CarritoService {
   urlD = `${environment.url}/cart/update_item`;
   urlE = `${environment.url}/cart/remove_item`;
   urlF = `${environment.url}/order/get_orders`;
+  urlG = `${environment.url}/order/create`;
+
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +39,9 @@ export class CarritoService {
 
   getOrders(session_id: any){
     return this.http.post(this.urlF, session_id).toPromise();
+  }
+  createOrder(body: any){
+    return this.http.post(this.urlG, body).toPromise();
   }
 
 }

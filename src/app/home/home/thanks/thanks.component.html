@@ -1,0 +1,63 @@
+<div class="container text-center">
+    <div class="card ">
+      <div class="card-body">
+        <div class="row">
+            <div class="col text-center">
+                <h1 style="color: #6f42c1;">¡ Gracias por tu compra !</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <p>En breve te enviaremos un correo con los detalles de tu compra e instucciones para la
+                            activación de tus productos y/o servicios.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Fecha y hora del pago: {{venta.create_time |
+                            date:'medium'}}<strong></strong></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                            <label>No. de Pedido: {{venta.id}}<strong></strong></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                    <label>Monto del pago: ${{venta.purchase_units[0].amount.value}}<strong></strong></label>
+                    </div>
+                </div>
+            <div class="row text-center">
+                <div class="col-6">
+                    <a style="color: #6f42c1;">Seguir comprando</a>
+                </div>
+                <div class="col-6">
+                    <a style="color: #6f42c1;">Ver mis pedidos</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <br>
+                    <button class="w-100" type="button" mat-raised-button color="primary" mat-button >INGRESAR AL SISTEMA</button>
+                </div>
+            </div>
+              
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+  
+   
+</div>

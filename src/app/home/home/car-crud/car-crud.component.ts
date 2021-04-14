@@ -20,7 +20,8 @@ export class CarCrudComponent implements OnInit {
   getCarNav = false;
   constructor(
     private carrito: CarritoService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
   
 
@@ -60,6 +61,10 @@ export class CarCrudComponent implements OnInit {
     }).catch((err: any) => {
       console.error(err);
     });
+  }
+
+  misPedidos(){
+    this.router.navigate(['/home/pedido'])
   }
 
   async deleteProduct(itemId: any) {

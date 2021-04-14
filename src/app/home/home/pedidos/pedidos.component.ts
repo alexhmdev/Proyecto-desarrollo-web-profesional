@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICreateOrderRequest, IPayPalConfig } from "ngx-paypal";
+import { CarritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -10,20 +11,36 @@ export class PedidosComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   totalPrice: string;
   sessionDecrypted: any;
-  private _productoService: any;
   datosCompra: any;
   compraExitosa: boolean;
-  mostrarPago: boolean;
+  mostrarPago: boolean = true;
+  sessionId: any;
+  data: any;
+  getCarNav: boolean = false;
+  constructor(private carrito: CarritoService) { }
   
-  constructor() { }
-
   ngOnInit(): void {
     this.initConfig()
+    if (localStorage.getItem("user_data")) {
+      let data = JSON.parse(localStorage.getItem("user_data"));
+      console.log(data);
+      this.sessionId = data.session_id;
+    }
+    this.obtenerPedido()
+  }
+  obtenerPedido(){
+    this.carrito.postDetails({session_id: this.sessionId}).then((data: any) => {
+      console.log(data);
+      this.data = data.data
+      this.totalPrice = data.data.total
+    }).catch((err: any) => {
+      console.error(err);
+    });
   }
   private initConfig(): void {
     this.payPalConfig = {
       currency: 'MXN',
-      clientId: 'Adt8PG7veb1bas7VKF9tjadhw430t-LfRj96vXehx9a0W8lKGe5r4mR2lM9knIcaL7miRvkyZGSIIQ3V',
+      clientId: 'AUYQ8sMf8j8X21eERCvCzBb6J3nuOeyd6_G3zXitlXlzWWWaXUCHuwX4wULaWF3gKlVsv0x6gD8Qe2El',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [
@@ -63,10 +80,10 @@ export class PedidosComponent implements OnInit {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
 
         let json = {
-          session_id: this.sessionDecrypted,
+          session_id: this.sessionId,
           paypal_payment_details: data
         }
-        this._productoService.registrarCompra(json).then((res: any) => {
+        this.carrito.createOrder(json).then((res: any) => {
 
           if (res.status == "error") {
           console.log(res);
@@ -77,6 +94,10 @@ export class PedidosComponent implements OnInit {
             this.compraExitosa = true;
             this.mostrarPago = false;
             //obtener carrito
+            this.getCarNav = true;
+      setTimeout(() => {
+        this.getCarNav = false;
+      }, 500);
           }
 
         }).catch((err: any) => {

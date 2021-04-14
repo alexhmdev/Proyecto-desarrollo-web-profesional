@@ -2,7 +2,7 @@
 
 <h1 style="transform: translateX(50px)">Carrito de compras</h1>
 
-<div class="row">
+<div *ngIf="details.items" class="row" style="position: relative; z-index: 3;">
     <div class="col">
 
     </div>
@@ -38,7 +38,7 @@
         <div class="row">
 
             <div class="col">
-                <button class="w-100" type="button" color="primary" mat-raised-button> PAGAR
+                <button (click)="misPedidos()" class="w-100" type="button" color="primary" mat-raised-button> PAGAR
                 </button>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <!-- <button class="w-100" type="button" mat-raised-button color="primary" mat-button (click)="agregarCarrito()">Agregar alcarrito</button> -->
     </div>
 </div>
-<div class="row" style="margin-top: -150px">
+<div *ngIf="details.items" class="row" style="margin-top: -150px; z-index: 1;">
     <div class="col">
         <div class="row" *ngFor="let item of details.items">
             <div class="col-5">
@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-12 ">
                         <div class="row">
-                            <div class="col-2 text-center" style="color:#dc3545; margin-top: 60px; ">
+                            <div class="col-2 text-center" style="color:#dc3545; margin-top: 60px; position: relative; z-index: 3;">
                                 <svg xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" width="16" height="16" fill="currentColor"
                                     class="bi bi-x-circle-fill" viewBox="0 0 16 16"
                                     (click)="deleteProduct(item.product_id)">
@@ -68,8 +68,8 @@
                                     [src]="item.images_small" alt="Photo of a product" />
                             </div>
                             <div class="col-7">
+                                <strong>{{item.short_description}}</strong>
                                 <p style="margin-top: 15px; ">{{item.long_description}}</p>
-
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-5">
 
-                        <mat-form-field>
+                        <mat-form-field style="position: relative; z-index: 3;">
                             <mat-label>Cantidad</mat-label>
                             <!-- <input matInput type="number" > -->
                             <input matInput type="number" [(ngModel)]="item.quantity"
@@ -105,3 +105,15 @@
     </div>
 
 </div>
+<table class="table" *ngIf="!details.items || details.items === undefined">
+    <tbody >
+        <tr>
+            <td colspan="14">
+                <div class="alert-dismissible text-center" style="padding: .75rem 1.25rem;">
+                    <i class="fa fa-frown-o fa-2x" aria-hidden="true"></i>
+                    <h3 style="height: 100%;width: 100%; color: #6f42c1;">NO TIENES PRODUCTOS EN TU CARRITO ☹</h3>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
